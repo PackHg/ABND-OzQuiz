@@ -7,7 +7,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -34,6 +36,9 @@ public class EditTextFragment extends Fragment {
     private Button mSubmitButton;
 
     private OnFragmentInteractionListener mListener;
+
+    @BindView(R.id.result)
+    TextView resultTextView;
 
     public EditTextFragment() {
         // Required empty public constructor
@@ -74,7 +79,6 @@ public class EditTextFragment extends Fragment {
 
         //Find the Submit button
         // mSubmitButton = (Button) view.findViewById(R.id.button_submit);
-
 
         return view;
     }
@@ -127,4 +131,7 @@ public class EditTextFragment extends Fragment {
         void onFragmentInteraction(Boolean isCorrect);
     }
 
+    public void updateResult(int result) {
+        resultTextView.setText(String.valueOf(result));
+    }
 }
