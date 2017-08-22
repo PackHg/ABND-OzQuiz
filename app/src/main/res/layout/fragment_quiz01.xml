@@ -10,31 +10,64 @@
         android:id="@+id/question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/question01"
+        android:text="@string/question02"
         android:textColor="@color/colorBlack" />
 
-    <CheckBox
-        android:id="@+id/checkbox_apac"
-        android:layout_width="match_parent"
+    <RadioGroup
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/question01_answer01" />
+        android:orientation="vertical">
 
-    <CheckBox
-        android:id="@+id/checkbox_oceania"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/question01_answer02" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-    <CheckBox
-        android:id="@+id/checkbox_south_asia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/question01_answer03" />
+            <RadioButton
+                android:id="@+id/radiobutton01_new_zealander_flag"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:drawableEnd="@drawable/ic_new_zealander_flag"
+                android:drawableRight="@drawable/ic_new_zealander_flag"
+                android:text="1. "
+                android:padding="@dimen/activity_margin_half" />
 
-    <CheckBox
-        android:id="@+id/checkbox_australasia"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/question01_answer04" />
+            <RadioButton
+                android:id="@+id/radiobutton02_fijian_flag"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:drawableEnd="@drawable/ic_fijian_flag"
+                android:drawableRight="@drawable/ic_fijian_flag"
+                android:text="2. "
+                android:padding="@dimen/activity_margin_half" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/radiobutton03_tuvaluan_flag"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:drawableEnd="@drawable/ic_tuvaluan_flag"
+                android:drawableRight="@drawable/ic_tuvaluan_flag"
+                android:text="3. "
+                android:padding="@dimen/activity_margin_half" />
+
+            <RadioButton
+                android:id="@+id/radiobutton03_australian_flag"
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:drawableEnd="@drawable/ic_australian_flag"
+                android:drawableRight="@drawable/ic_australian_flag"
+                android:text="4. "
+                android:padding="@dimen/activity_margin_half" />
+
+        </LinearLayout>
+
+    </RadioGroup>
 
 </LinearLayout>

@@ -1,0 +1,40 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_quiz00"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".QuizFragment">
+
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/question01"
+        android:textColor="@color/colorBlack" />
+
+    <CheckBox
+        android:id="@+id/checkbox_apac"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/question01_answer01" />
+
+    <CheckBox
+        android:id="@+id/checkbox_oceania"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/question01_answer02" />
+
+    <CheckBox
+        android:id="@+id/checkbox_south_asia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/question01_answer03" />
+
+    <CheckBox
+        android:id="@+id/checkbox_australasia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/question01_answer04" />
+
+</LinearLayout>

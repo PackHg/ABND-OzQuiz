@@ -12,10 +12,10 @@
 
     <!-- Quiz 01 -->
     <string name="question01">In which of the following regions is Australia in?</string>
-    <string name="question01_answer01">Asia-Pacific</string>
-    <string name="question01_answer02">Oceania</string>
-    <string name="question01_answer03">South Asia</string>
-    <string name="question01_answer04">Australasia</string>
+    <string name="question01_answer01">1. Asia-Pacific</string>
+    <string name="question01_answer02">2. Oceania</string>
+    <string name="question01_answer03">3. South Asia</string>
+    <string name="question01_answer04">4. Australasia</string>
 
     <!-- Quiz 02-->
     <string name="question02">Which flag is Australian?</string>

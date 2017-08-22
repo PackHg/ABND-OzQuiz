@@ -14,9 +14,6 @@ import android.widget.Toast;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-// TODO: Once user's answer is correct, don't increase score if they submit
-// again on the same quiz.
-
 /**
  * A fragment with ?
  * Use the {@link QuizFragment#newInstance} factory method to
@@ -31,13 +28,13 @@ public class QuizFragment extends Fragment {
     private int mQuizNumber;
 
     // Binding Views for Quiz 01
-    @Nullable @BindView(R.id.checkbox_apac) CheckBox checkBoxApac;
-    @Nullable @BindView(R.id.checkbox_oceania) CheckBox checkBoxOceania;
-    @Nullable @BindView(R.id.checkbox_south_asia) CheckBox checkBoxSouthAsia;
-    @Nullable @BindView(R.id.checkbox_australasia) CheckBox checkBoxAustralasia;
+    @Nullable @BindView(R.id.checkbox_apac) CheckBox checkBox01_Apac;
+    @Nullable @BindView(R.id.checkbox_oceania) CheckBox checkBox02_Oceania;
+    @Nullable @BindView(R.id.checkbox_south_asia) CheckBox checkBox03_SouthAsia;
+    @Nullable @BindView(R.id.checkbox_australasia) CheckBox checkBox04_Australasia;
 
     // Binding Views for Quiz 02
-    @Nullable @BindView(R.id.radio_button_australian_flag) RadioButton radioButtonAustralianFlag;
+    @Nullable @BindView(R.id.radiobutton03_australian_flag) RadioButton radioButtonAustralianFlag;
 
     public QuizFragment() {
         // Required empty public constructor
@@ -73,11 +70,9 @@ public class QuizFragment extends Fragment {
         View view = null;
 
         switch (mQuizNumber) {
-            case 1:
-                view = inflater.inflate(R.layout.fragment_quiz01, container, false);
+            case 0:
+                view = inflater.inflate(R.layout.fragment_quiz00, container, false);
                 break;
-            default:
-                // TODO: raise an execption?
         }
 
         Log.v(LOG_TAG, "onCreateView() - mQuizNumber: " + mQuizNumber);
@@ -92,13 +87,13 @@ public class QuizFragment extends Fragment {
     public boolean checkAnswers() {
 
         switch (mQuizNumber) {
-            case 1:
-                if (checkBoxSouthAsia.isChecked()) {
+            case 0:
+                if (checkBox03_SouthAsia.isChecked()) {
                     displayFeedback(getString(R.string.one_answer_incorrect));
                     return false;
                 }
-                if (checkBoxApac.isChecked() || checkBoxOceania.isChecked() ||
-                        checkBoxAustralasia.isChecked()) {
+                if (checkBox01_Apac.isChecked() || checkBox02_Oceania.isChecked() ||
+                        checkBox04_Australasia.isChecked()) {
                     displayFeedback(getString(R.string.answer_correct));
                     return true;
                 }
