@@ -13,8 +13,8 @@ import butterknife.OnClick;
 // DONE: list possible answers as 1, 2, 3 ...
 // DONE: Once user's answer is correct, don't increase score if they submit again on the same quiz.
 // DROPPED: Implement additional "Reset" button?
-// TODO: Implement handing of screen orientation change to landscape.
-// TODO: implement FragmentDialog when "View answer" is clicked.
+// DONE: Implement handling of screen orientation change to landscape.
+// DONE: implement FragmentDialog when "View answer" is clicked.
 // TODO: implement "Next" button is clicked.
 
 public class MainActivity extends AppCompatActivity {
@@ -69,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // Display user score.
         displayScore(mScore);
 
         mQuizFragment = (QuizFragment) getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT);
@@ -106,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
      * @param score score to display.
      */
     private void displayScore(int score) {
-        mScoreTextView.setText(String.valueOf(mScore));
+        mScoreTextView.setText(String.valueOf(score));
     }
 
     @OnClick(R.id.button_submit_answer)

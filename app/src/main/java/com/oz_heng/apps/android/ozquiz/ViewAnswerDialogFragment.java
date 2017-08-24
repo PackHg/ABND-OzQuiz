@@ -11,17 +11,11 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 /**
- * Created by Pack Heng on 23/08/17
- * pack@oz-heng.com
+ * DialogFragment to show the correct answer(s).
  */
-
 public class ViewAnswerDialogFragment extends DialogFragment {
     int mQuizNumber;
     final static String KEY_QUIZ_NUMBER = "quiz number";
-
-    public ViewAnswerDialogFragment() {
-        // Required empty public constructor
-    }
 
     /**
      * Create a new instance of ViewAnswerDialogFragment, providing "quizNumber"
@@ -65,5 +59,4 @@ public class ViewAnswerDialogFragment extends DialogFragment {
     public void ok (View view) {
         dismiss();
     }
-
 }
