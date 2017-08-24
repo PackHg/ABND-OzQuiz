@@ -1,6 +1,5 @@
 package com.oz_heng.apps.android.ozquiz;
 
-import android.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -21,8 +20,9 @@ import butterknife.OnClick;
 public class MainActivity extends AppCompatActivity {
     final static String LOG_TAG = MainActivity.class.getSimpleName();
 
-    // Tag for naming the current fragment
+    // Tag for identifying the current fragment
     final static String TAG_FRAGMENT = "com.oz_heng.apps.android.ozquiz.quizFragment";
+    final static String TAG_DIALOG_FRAGMENT= "com.oz_heng.apps.android.ozquiz.viewAnswerDialogFragment";
 
     private int mScore = 0;                 // User score
     private int mCurrentQuizNumber = 0;     // Current quiz number
@@ -42,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.score) TextView mScoreTextView;
 
     QuizFragment mQuizFragment;
-    Fragment mFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
 
         mQuizFragment = (QuizFragment) getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT);
 
-        // if (findViewById(R.id.fragment_quiz00) == null) {
+        // if (findViewById(R.id.quiz00) == null) {
         if (mQuizFragment == null) {
             mQuizFragment = QuizFragment.newInstance(mCurrentQuizNumber);
 
@@ -85,19 +84,6 @@ public class MainActivity extends AppCompatActivity {
 
             Log.v(LOG_TAG, "Created a new instance of QuizFragment.");
         }
-//
-//        if (mQuizFragment == null) {
-//
-//            mQuizFragment = new QuizFragment();
-//
-//            // In case this fragment was started with special instructions from an Intent,
-//            // pass the Intent's extras to the fragment as arguments
-//            mQuizFragment.setArguments(getIntent().getExtras());
-//
-//            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-//            transaction.replace(R.id.fragment_container, mQuizFragment);
-//            transaction.addToBackStack(null);
-//            transaction.commit();
     }
 
     @Override
@@ -123,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
         mScoreTextView.setText(String.valueOf(mScore));
     }
 
-    @OnClick(R.id.submit_answer)
+    @OnClick(R.id.button_submit_answer)
     public void check() {
         if (mQuizFragment != null) {
             Log.v(LOG_TAG, "check() - mQuizFragment is not null.");
@@ -140,4 +126,15 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @OnClick(R.id.button_view_answer)
+    public void viewAnswer() {
+        ViewAnswerDialogFragment df = ViewAnswerDialogFragment.newInstance(mCurrentQuizNumber);
+        df.show(getSupportFragmentManager(), TAG_DIALOG_FRAGMENT);
+    }
+
+    // TODO: Next
+    @OnClick(R.id.button_next_quiz)
+    public void nextQuiz() {
+
+    }
 }

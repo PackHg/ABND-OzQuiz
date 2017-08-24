@@ -48,18 +48,23 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/submit_answer"
+                android:id="@+id/button_submit_answer"
                 style="@style/ButtonStyle"
                 android:text="@string/submit_answer" />
 
             <Button
-                android:id="@+id/view_answer"
+                android:id="@+id/button_view_answer"
                 style="@style/ButtonStyle"
+                android:layout_marginLeft="@dimen/activity_margin_half"
+                android:layout_marginStart="@dimen/activity_margin_half"
                 android:text="@string/view_answer" />
 
             <Button
-                android:id="@+id/next"
+                android:id="@+id/button_next_quiz"
                 style="@style/ButtonStyle"
+                android:layout_marginLeft="@dimen/activity_margin_half"
+                android:layout_marginStart="@dimen/activity_margin_half"
+
                 android:text="@string/next" />
 
         </LinearLayout>

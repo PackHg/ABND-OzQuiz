@@ -36,6 +36,14 @@ public class QuizFragment extends Fragment {
     // Binding Views for Quiz 02
     @Nullable @BindView(R.id.radiobutton03_australian_flag) RadioButton radioButtonAustralianFlag;
 
+//    userNavigation mCallBack;
+//
+//    // The container activity must implement this interface so this fragment can deliver
+//    // messages
+//    public interface userNavigation {
+//        public void next(int quizNumber);
+//    }
+
     public QuizFragment() {
         // Required empty public constructor
     }
@@ -71,7 +79,7 @@ public class QuizFragment extends Fragment {
 
         switch (mQuizNumber) {
             case 0:
-                view = inflater.inflate(R.layout.fragment_quiz00, container, false);
+                view = inflater.inflate(R.layout.quiz00, container, false);
                 break;
         }
 
@@ -83,6 +91,20 @@ public class QuizFragment extends Fragment {
 
         return view;
     }
+
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//
+//        // This makes sure that the container activity has implemented
+//        // the callback interface. If not, it throws an exception.
+//        try {
+//            mCallBack = (userNavigation) context;
+//        } catch (ClassCastException e) {
+//            throw new ClassCastException(context.toString()
+//                    + " must implement userNavigation");
+//        };
+//    }
 
     public boolean checkAnswers() {
 
@@ -108,5 +130,4 @@ public class QuizFragment extends Fragment {
     private void displayFeedback(String feedback) {
         Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT).show();
     }
-
 }
