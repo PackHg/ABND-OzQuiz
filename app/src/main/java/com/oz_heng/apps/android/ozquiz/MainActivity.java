@@ -2,6 +2,7 @@ package com.oz_heng.apps.android.ozquiz;
 
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.TextView;
@@ -71,15 +72,15 @@ public class MainActivity extends AppCompatActivity {
 
         displayScore(mScore);
 
-        mQuizFragment = (QuizFragment) getSupportFragmentManager().findFragmentByTag(TAG_FRAGMENT);
+        mQuizFragment = (QuizFragment) getSupportFragmentManager().
+                findFragmentByTag(TAG_FRAGMENT + mCurrentQuizNumber);
 
-        // if (findViewById(R.id.quiz00) == null) {
         if (mQuizFragment == null) {
             mQuizFragment = QuizFragment.newInstance(mCurrentQuizNumber);
 
             // Add the fragment to the 'activity_container' layout
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
-                    mQuizFragment, TAG_FRAGMENT).commit();
+                    mQuizFragment, TAG_FRAGMENT + mCurrentQuizNumber).commit();
 
             Log.v(LOG_TAG, "Created a new instance of QuizFragment.");
         }
@@ -128,12 +129,28 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.button_view_answer)
     public void viewAnswer() {
         ViewAnswerDialogFragment df = ViewAnswerDialogFragment.newInstance(mCurrentQuizNumber);
-        df.show(getSupportFragmentManager(), TAG_DIALOG_FRAGMENT);
+        df.show(getSupportFragmentManager(), TAG_DIALOG_FRAGMENT + mCurrentQuizNumber);
     }
 
     // TODO: Next
     @OnClick(R.id.button_next_quiz)
     public void nextQuiz() {
+        mCurrentQuizNumber ++;
+        // TODO: handle when user clicks "Next" after asnwering last quiz.
+        if (mCurrentQuizNumber > mAnswerArray.length) {
+            mCurrentQuizNumber = 0;
+        }
 
+        // Create a new QuizFragment with the next quiz number as an argument.
+        QuizFragment newFragment = QuizFragment.newInstance(mCurrentQuizNumber);
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        // Replace whatever is in the fragment container view with this fragment, and add
+        // the transaction to the back stack so the user can navigate back.
+        transaction.replace(R.id.fragment_container, newFragment,
+                TAG_DIALOG_FRAGMENT + mCurrentQuizNumber);
+
+        // Commit the transaction.
+        transaction.commit();
     }
 }

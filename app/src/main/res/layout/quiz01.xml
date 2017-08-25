@@ -7,56 +7,50 @@
     tools:context=".QuizFragment">
 
     <TextView
-        android:id="@+id/question"
         style="@style/QuizTextViewStyle"
         android:text="@string/question02" />
 
     <RadioGroup
-        android:layout_width="wrap_content"
+        android:id="@+id/quiz01_rg01"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/quiz01_rb01_new_zealander_flag"
+            style="@style/QuizRadioButtonStyle"
+            android:drawableEnd="@drawable/ic_new_zealander_flag"
+            android:drawableRight="@drawable/ic_new_zealander_flag"
+            android:text="1. " />
 
-            <RadioButton
-                android:id="@+id/radiobutton01_new_zealander_flag"
-                style="@style/QuizRadioButtonStyle"
-                android:drawableEnd="@drawable/ic_new_zealander_flag"
-                android:drawableRight="@drawable/ic_new_zealander_flag"
-                android:text="1. " />
+        <RadioButton
+            android:id="@+id/quiz01_rb02_fijian_flag"
+            style="@style/QuizRadioButtonStyle"
+            android:drawableEnd="@drawable/ic_fijian_flag"
+            android:drawableRight="@drawable/ic_fijian_flag"
+            android:text="2. " />
 
-            <RadioButton
-                android:id="@+id/radiobutton02_fijian_flag"
-                style="@style/QuizRadioButtonStyle"
-                android:drawableEnd="@drawable/ic_fijian_flag"
-                android:drawableRight="@drawable/ic_fijian_flag"
-                android:text="2. " />
+    </RadioGroup>
 
-        </LinearLayout>
+    <RadioGroup
+        android:id="@+id/quiz01_rg02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+        <RadioButton
+            android:id="@+id/quiz01_rb03_tuvaluan_flag"
+            style="@style/QuizRadioButtonStyle"
+            android:drawableEnd="@drawable/ic_tuvaluan_flag"
+            android:drawableRight="@drawable/ic_tuvaluan_flag"
+            android:text="3. " />
 
-            <RadioButton
-                android:id="@+id/radiobutton03_tuvaluan_flag"
-                style="@style/QuizRadioButtonStyle"
-                android:drawableEnd="@drawable/ic_tuvaluan_flag"
-                android:drawableRight="@drawable/ic_tuvaluan_flag"
-                android:text="3. " />
-
-            <RadioButton
-                android:id="@+id/radiobutton03_australian_flag"
-                style="@style/QuizRadioButtonStyle"
-                android:drawableEnd="@drawable/ic_australian_flag"
-                android:drawableRight="@drawable/ic_australian_flag"
-                android:text="4. " />
-
-        </LinearLayout>
+        <RadioButton
+            android:id="@+id/quiz01_rb03_australian_flag"
+            style="@style/QuizRadioButtonStyle"
+            android:drawableEnd="@drawable/ic_australian_flag"
+            android:drawableRight="@drawable/ic_australian_flag"
+            android:text="4. " />
 
     </RadioGroup>
 

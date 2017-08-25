@@ -6,27 +6,26 @@
     tools:context=".QuizFragment">
 
     <TextView
-        android:id="@+id/question"
         style="@style/QuizTextViewStyle"
         android:text="@string/question01" />
 
     <CheckBox
-        android:id="@+id/checkbox_apac"
+        android:id="@+id/quiz00_checkbox_apac"
         style="@style/QuizCheckBoxStyle"
         android:text="@string/question01_answer01" />
 
     <CheckBox
-        android:id="@+id/checkbox_oceania"
+        android:id="@+id/quiz00_checkbox_oceania"
         style="@style/QuizCheckBoxStyle"
         android:text="@string/question01_answer02" />
 
     <CheckBox
-        android:id="@+id/checkbox_south_asia"
+        android:id="@+id/quiz00_checkbox_south_asia"
         style="@style/QuizCheckBoxStyle"
         android:text="@string/question01_answer03" />
 
     <CheckBox
-        android:id="@+id/checkbox_australasia"
+        android:id="@+id/quiz00_checkbox_australasia"
         style="@style/QuizCheckBoxStyle"
         android:text="@string/question01_answer04" />
 

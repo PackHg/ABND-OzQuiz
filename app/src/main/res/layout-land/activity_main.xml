@@ -16,36 +16,43 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_margin"
-            android:gravity="center_horizontal"
             android:orientation="horizontal">
 
-            <TextView
-                style="@style/TextViewStyle"
-                android:text="@string/score"
-                android:textAllCaps="true" />
-
-            <TextView
-                android:id="@+id/score"
-                style="@style/TextViewStyle"
-                android:layout_marginLeft="@dimen/activity_margin_half"
-                android:layout_marginStart="@dimen/activity_margin_half"
-                tools:text="0" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <!-- An empty placeholder to contain for a Fragment layout -->
-            <FrameLayout
-                android:id="@+id/fragment_container"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="start"
-                android:layout_weight="4" />
+                android:layout_weight="3"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_margin_half"
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/TextViewStyle"
+                        android:text="@string/score"
+                        android:textAllCaps="true" />
+
+                    <TextView
+                        android:id="@+id/score"
+                        style="@style/TextViewStyle"
+                        android:layout_marginLeft="@dimen/activity_margin_half"
+                        android:layout_marginStart="@dimen/activity_margin_half"
+                        tools:text="0" />
+
+                </LinearLayout>
+
+                <!-- An empty placeholder to contain for a Fragment layout -->
+                <FrameLayout
+                    android:id="@+id/fragment_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start" />
+
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"

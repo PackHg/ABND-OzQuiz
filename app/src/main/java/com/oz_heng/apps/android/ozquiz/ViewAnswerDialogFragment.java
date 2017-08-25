@@ -45,7 +45,7 @@ public class ViewAnswerDialogFragment extends DialogFragment {
         int layoutId = 0;
         switch (mQuizNumber) {
             case 0:
-                layoutId = R.layout.quiz00_view_answer;
+                layoutId = R.layout.quiz00_answer;
                 break;
         }
 

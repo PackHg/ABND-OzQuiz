@@ -26,13 +26,13 @@ public class QuizFragment extends Fragment {
     private int mQuizNumber;
 
     // Binding Views for Quiz 01
-    @Nullable @BindView(R.id.checkbox_apac) CheckBox checkBox01_Apac;
-    @Nullable @BindView(R.id.checkbox_oceania) CheckBox checkBox02_Oceania;
-    @Nullable @BindView(R.id.checkbox_south_asia) CheckBox checkBox03_SouthAsia;
-    @Nullable @BindView(R.id.checkbox_australasia) CheckBox checkBox04_Australasia;
+    @Nullable @BindView(R.id.quiz00_checkbox_apac) CheckBox checkBox01_Apac;
+    @Nullable @BindView(R.id.quiz00_checkbox_oceania) CheckBox checkBox02_Oceania;
+    @Nullable @BindView(R.id.quiz00_checkbox_south_asia) CheckBox checkBox03_SouthAsia;
+    @Nullable @BindView(R.id.quiz00_checkbox_australasia) CheckBox checkBox04_Australasia;
 
     // Binding Views for Quiz 02
-    @Nullable @BindView(R.id.radiobutton03_australian_flag) RadioButton radioButtonAustralianFlag;
+    @Nullable @BindView(R.id.quiz01_rb03_australian_flag) RadioButton radioButtonAustralianFlag;
 
     public QuizFragment() {
         // Required empty public constructor
@@ -71,6 +71,8 @@ public class QuizFragment extends Fragment {
             case 0:
                 view = inflater.inflate(R.layout.quiz00, container, false);
                 break;
+            case 1:
+                view = inflater.inflate(R.layout.quiz01, container, false);
         }
 
         Log.v(LOG_TAG, "onCreateView() - mQuizNumber: " + mQuizNumber);
