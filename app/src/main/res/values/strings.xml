@@ -10,7 +10,7 @@
     <string name="choose">Make your choice</string>
     <string name="answer_is_correct">Your answer is correct</string>
     <string name="answer_is_incorrect">Your answer is incorrect</string>
-    <string name="one_answer_incorrect">One answer is incorrect</string>
+    <string name="some_answer_incorrect">Some answer is incorrect</string>
     <string name="your_answer">Your answer:</string>
     <string name="enter_here">Enter here</string>
     <string name="enter_answer">Enter your answer</string>
@@ -33,4 +33,12 @@
     <string name="quiz02_right_answer">Canberra</string>
     <string name="quiz02_view_answer">Canberra is the capital of Australia.</string>
 
+    <!-- Quiz 00 -->
+    <string name="quiz03">What is Tim Tam?</string>
+    <string name="quiz03_option01i">1. A brand of cheese made in Australia</string>
+    <string name="quiz03_option02c">"2. Chocolate biscuit made by Arnott's"</string>
+    <string name="quiz03_option03c">3. Is definitely a favourite in Australia</string>
+    <string name="quiz03_option04i">4. A herbivorous leaping marsupial mammal</string>
+    <string name="quiz03_view_answer01">"Answer 2 or 3 is correct."\n\n"Tim Tam is a brand of chocolate biscuit made by Arnott's. It consists of two malted biscuits separated by a light chocolate cream filling and coated in a thin layer of textured chocolate."</string>
+    <string name="quiz03_view_answer02">"Tim Tam biscuits are definitely a favovourite in Australia, with one in every two households containing a packet of these biscuits."</string>
 </resources>

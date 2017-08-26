@@ -1,10 +1,13 @@
 package com.oz_heng.apps.android.ozquiz;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
 import butterknife.BindView;
@@ -35,14 +38,14 @@ public class MainActivity extends AppCompatActivity {
                                                the first quiz. */
 
     // Array to record user answer to each quiz.
-    static boolean[] mAnswerArray = {false, false, false};
+    static boolean[] mAnswerArray = {false, false, false, false};
 
     // Tag used to save user data with SharedPreferences.
     final static String USER_DATA = "com.oz_heng.apps.android.ozquiz.userData";
     final static String KEY_SCORE = "score";
     final static String KEY_QUIZ_NUMBER = "quiz number";
     final static String KEY_IS_NEW_GAME = "Is new game";
-    final static String[] KEY_ANWSER_ARRAY = {"quiz00", "quiz01", "quiz02"};
+    final static String[] KEY_ANWSER_ARRAY = {"quiz00", "quiz01", "quiz02", "quiz03"};
 
     @BindView(R.id.score) TextView mScoreTextView;
 
@@ -130,12 +133,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Display the answer with a DialogFragment when the "View answer" button is clicked.
+     */
     @OnClick(R.id.button_view_answer)
     public void viewAnswer() {
         ViewAnswerDialogFragment df = ViewAnswerDialogFragment.newInstance(mCurrentQuizNumber);
         df.show(getSupportFragmentManager(), TAG_DIALOG_FRAGMENT + mCurrentQuizNumber);
     }
 
+    /**
+     * Move to the next quiz when the "Next" button is clicked.
+     */
     @OnClick(R.id.button_next_quiz)
     public void nextQuiz() {
         mCurrentQuizNumber ++;
@@ -157,5 +166,21 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
 
         mQuizFragment = newFragment;
+        hideSoftKeyboard();
+    }
+
+    /**
+     * Hide the Android soft keyboard.
+     *
+     * The Android soft keyboard can be still displayed when moving from a quiz
+     * having an {@link android.widget.EditText} to the next quiz.
+     * This method hides the soft keyboard.
+     */
+    void hideSoftKeyboard() {
+        View view = this.getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
     }
 }

@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_quiz00"
+    style="@style/QuizCheckBoxStyle"
+    android:orientation="vertical"
+    tools:context=".QuizFragment">
+
+    <TextView
+        style="@style/QuizTextViewStyle"
+        android:text="@string/quiz03" />
+
+    <CheckBox
+        android:id="@+id/quiz03_checkbox01"
+        style="@style/QuizCheckBoxStyle"
+        android:text="@string/quiz03_option01i" />
+
+    <CheckBox
+        android:id="@+id/quiz03_checkbox02"
+        style="@style/QuizCheckBoxStyle"
+        android:text="@string/quiz03_option02c" />
+
+    <CheckBox
+        android:id="@+id/quiz03_checkbox03"
+        style="@style/QuizCheckBoxStyle"
+        android:text="@string/quiz03_option03c" />
+
+    <CheckBox
+        android:id="@+id/quiz03_checkbox04"
+        style="@style/QuizCheckBoxStyle"
+        android:text="@string/quiz03_option04i" />
+
+</LinearLayout>

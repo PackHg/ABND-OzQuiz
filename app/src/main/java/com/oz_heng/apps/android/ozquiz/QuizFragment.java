@@ -49,6 +49,12 @@ public class QuizFragment extends Fragment {
     // Binding Views for Quiz 02
     @Nullable @BindView(R.id.quiz02_text_answer) EditText quiz02TextAnswer;
 
+    // Binding Views for Quiz 03
+    @Nullable @BindView(R.id.quiz03_checkbox01) CheckBox quiz03CheckBox01i;
+    @Nullable @BindView(R.id.quiz03_checkbox02) CheckBox quiz03CheckBox02c;
+    @Nullable @BindView(R.id.quiz03_checkbox03) CheckBox quiz03CheckBox03c;
+    @Nullable @BindView(R.id.quiz03_checkbox04) CheckBox quiz03CheckBox04i;
+
     private Unbinder mUnbinder;
 
     public QuizFragment() {
@@ -94,7 +100,9 @@ public class QuizFragment extends Fragment {
             case 2:
                 view = inflater.inflate(R.layout.quiz02, container, false);
                 break;
-
+            case 3:
+                view = inflater.inflate(R.layout.quiz03, container, false);
+                break;
         }
 
         Log.v(LOG_TAG, "onCreateView() - mQuizNumber: " + mQuizNumber);
@@ -135,7 +143,7 @@ public class QuizFragment extends Fragment {
                     }
 
                     if (quiz00CheckBox03_SouthAsia.isChecked()) {
-                        displayToast(getString(R.string.one_answer_incorrect));
+                        displayToast(getString(R.string.some_answer_incorrect));
                         return false;
                     }
 
@@ -199,6 +207,36 @@ public class QuizFragment extends Fragment {
                     Log.e(LOG_TAG, "Quiz " + quizNumber + ": EditText is null.");
                     return false;
                 }
+
+            case 3:
+                if (quiz03CheckBox01i != null &&
+                        quiz03CheckBox02c != null &&
+                        quiz03CheckBox03c != null &&
+                        quiz03CheckBox04i != null) {
+
+                    // If no CheckBox has been checked, display a toast telling the user to choose.
+                    if (!quiz03CheckBox01i.isChecked() &&
+                            !quiz03CheckBox02c.isChecked() &&
+                            !quiz03CheckBox03c.isChecked() &&
+                            !quiz03CheckBox04i.isChecked()) {
+                        displayToast(getString(R.string.choose));
+                        return false;
+                    }
+
+                    if (quiz03CheckBox01i.isChecked() || quiz03CheckBox04i.isChecked()) {
+                        displayToast(getString(R.string.some_answer_incorrect));
+                        return false;
+                    }
+
+                    if (quiz03CheckBox02c.isChecked() || quiz03CheckBox03c.isChecked()) {
+                        displayToast(getString(R.string.answer_is_correct));
+                        return true;
+                    }
+                } else {
+                    Log.e(LOG_TAG, "Quiz " + quizNumber + ": Some of the CheckBoxes is null.");
+                    return false;
+                }
+                break;
         }
 
         Log.v(LOG_TAG, "checkAnswers() - mQuizNumber: " + mQuizNumber);
@@ -230,6 +268,5 @@ public class QuizFragment extends Fragment {
             quiz01RadioGroup01.clearCheck();
         }
     }
-
 }
 
