@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
     public void check() {
         if (mQuizFragment != null) {
             Log.v(LOG_TAG, "check() - mQuizFragment is not null.");
-            if (mQuizFragment.checkAnswers()) {
+            if (mQuizFragment.checkAnswers(mCurrentQuizNumber)) {
                 if (!mAnswerArray[mCurrentQuizNumber]) {
                     mScore++;
                     displayScore(mScore);
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
     public void nextQuiz() {
         mCurrentQuizNumber ++;
         // TODO: handle when user clicks "Next" after asnwering last quiz.
-        if (mCurrentQuizNumber > mAnswerArray.length) {
+        if (mCurrentQuizNumber >= mAnswerArray.length) {
             mCurrentQuizNumber = 0;
         }
 
@@ -148,9 +148,11 @@ public class MainActivity extends AppCompatActivity {
         // Replace whatever is in the fragment container view with this fragment, and add
         // the transaction to the back stack so the user can navigate back.
         transaction.replace(R.id.fragment_container, newFragment,
-                TAG_DIALOG_FRAGMENT + mCurrentQuizNumber);
+                TAG_FRAGMENT + mCurrentQuizNumber);
 
         // Commit the transaction.
         transaction.commit();
+
+        mQuizFragment = newFragment;
     }
 }

@@ -11,20 +11,20 @@
         android:text="@string/question02" />
 
     <RadioGroup
-        android:id="@+id/quiz01_rg01"
+        android:id="@+id/quiz01_radiogroup01"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/quiz01_rb01_new_zealander_flag"
+            android:id="@+id/quiz01_radiobutton01_new_zealander_flag"
             style="@style/QuizRadioButtonStyle"
             android:drawableEnd="@drawable/ic_new_zealander_flag"
             android:drawableRight="@drawable/ic_new_zealander_flag"
             android:text="1. " />
 
         <RadioButton
-            android:id="@+id/quiz01_rb02_fijian_flag"
+            android:id="@+id/quiz01_radiobutton02_fijian_flag"
             style="@style/QuizRadioButtonStyle"
             android:drawableEnd="@drawable/ic_fijian_flag"
             android:drawableRight="@drawable/ic_fijian_flag"
@@ -33,20 +33,20 @@
     </RadioGroup>
 
     <RadioGroup
-        android:id="@+id/quiz01_rg02"
+        android:id="@+id/quiz01_radiogroup02"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <RadioButton
-            android:id="@+id/quiz01_rb03_tuvaluan_flag"
+            android:id="@+id/quiz01_radiobutton03_tuvaluan_flag"
             style="@style/QuizRadioButtonStyle"
             android:drawableEnd="@drawable/ic_tuvaluan_flag"
             android:drawableRight="@drawable/ic_tuvaluan_flag"
             android:text="3. " />
 
         <RadioButton
-            android:id="@+id/quiz01_rb03_australian_flag"
+            android:id="@+id/quiz01_radiobutton04_australian_flag"
             style="@style/QuizRadioButtonStyle"
             android:drawableEnd="@drawable/ic_australian_flag"
             android:drawableRight="@drawable/ic_australian_flag"
