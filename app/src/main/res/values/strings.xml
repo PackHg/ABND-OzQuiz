@@ -7,6 +7,7 @@
     <string name="next">Next</string>
     <string name="ok">OK</string>
 
+    <string name="choose">Make your choice</string>
     <string name="answer_correct">Your answer is correct</string>
     <string name="answer_incorrect">Your answer is incorrect</string>
     <string name="one_answer_incorrect">One answer is incorrect</string>
@@ -21,5 +22,6 @@
 
     <!-- Quiz 01-->
     <string name="question02">Which flag is Australian?</string>
+    <string name="answer01">"The 4th flag is Australian."\n\n"The 1st, 2nd and 3rd flags are New Zelander, Fijian and Tuvaluan."</string>
 
 </resources>

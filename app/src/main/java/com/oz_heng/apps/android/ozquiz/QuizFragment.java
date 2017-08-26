@@ -19,6 +19,7 @@ import butterknife.Optional;
 import butterknife.Unbinder;
 
 import static com.oz_heng.apps.android.ozquiz.R.id.quiz01_radiobutton04_australian_flag;
+import static com.oz_heng.apps.android.ozquiz.R.layout.quiz01;
 
 /**
  * A fragment to display a layout corresponding to the quiz number.
@@ -32,18 +33,18 @@ public class QuizFragment extends Fragment {
     private int mQuizNumber;
 
     // Binding Views for Quiz 00
-    @Nullable @BindView(R.id.quiz00_checkbox_apac) CheckBox checkBox01_Apac;
-    @Nullable @BindView(R.id.quiz00_checkbox_oceania) CheckBox checkBox02_Oceania;
-    @Nullable @BindView(R.id.quiz00_checkbox_south_asia) CheckBox checkBox03_SouthAsia;
-    @Nullable @BindView(R.id.quiz00_checkbox_australasia) CheckBox checkBox04_Australasia;
+    @Nullable @BindView(R.id.quiz00_checkbox_apac) CheckBox quiz00CheckBox01_Apac;
+    @Nullable @BindView(R.id.quiz00_checkbox_oceania) CheckBox quiz00CheckBox02_Oceania;
+    @Nullable @BindView(R.id.quiz00_checkbox_south_asia) CheckBox quiz00CheckBox03_SouthAsia;
+    @Nullable @BindView(R.id.quiz00_checkbox_australasia) CheckBox quiz00CheckBox04_Australasia;
 
     // Binding Views for Quiz 01
-    @Nullable @BindView(R.id.quiz01_radiogroup01) RadioGroup radioGroup01;
-    @Nullable @BindView(R.id.quiz01_radiogroup02) RadioGroup radioGroup02;
-    @Nullable @BindView(R.id.quiz01_radiobutton01_new_zealander_flag) RadioButton radioButton01NewZealanderFlag;
-    @Nullable @BindView(R.id.quiz01_radiobutton02_fijian_flag) RadioButton radioButton02FijianFlag;
-    @Nullable @BindView(R.id.quiz01_radiobutton03_tuvaluan_flag) RadioButton radioButton03TuvaluanFlag;
-    @Nullable @BindView(R.id.quiz01_radiobutton04_australian_flag) RadioButton radioButton04AustralianFlag;
+    @Nullable @BindView(R.id.quiz01_radiogroup01) RadioGroup quiz01RadioGroup01;
+    @Nullable @BindView(R.id.quiz01_radiogroup02) RadioGroup quiz01RadioGroup02;
+    @Nullable @BindView(R.id.quiz01_radiobutton01_new_zealander_flag) RadioButton quiz01RadioButton01NewZealanderFlag;
+    @Nullable @BindView(R.id.quiz01_radiobutton02_fijian_flag) RadioButton quiz01RadioButton02FijianFlag;
+    @Nullable @BindView(R.id.quiz01_radiobutton03_tuvaluan_flag) RadioButton quiz01RadioButton03TuvaluanFlag;
+    @Nullable @BindView(R.id.quiz01_radiobutton04_australian_flag) RadioButton quiz01RadioButton04AustralianFlag;
 
     private Unbinder mUnbinder;
 
@@ -85,7 +86,7 @@ public class QuizFragment extends Fragment {
                 view = inflater.inflate(R.layout.quiz00, container, false);
                 break;
             case 1:
-                view = inflater.inflate(R.layout.quiz01, container, false);
+                view = inflater.inflate(quiz01, container, false);
         }
 
         Log.v(LOG_TAG, "onCreateView() - mQuizNumber: " + mQuizNumber);
@@ -111,33 +112,59 @@ public class QuizFragment extends Fragment {
 
         switch (quizNumber) {
             case 0:
-                if (checkBox01_Apac != null && checkBox02_Oceania != null && checkBox03_SouthAsia != null
-                        && checkBox04_Australasia != null) {
-                    if (checkBox03_SouthAsia.isChecked()) {
-                        displayFeedback(getString(R.string.one_answer_incorrect));
+                if (quiz00CheckBox01_Apac != null &&
+                        quiz00CheckBox02_Oceania != null &&
+                        quiz00CheckBox03_SouthAsia != null &&
+                        quiz00CheckBox04_Australasia != null) {
+
+                    // If no CheckBox has been checked, display a toast telling the user to choose.
+                    if (!quiz00CheckBox01_Apac.isChecked() &&
+                            !quiz00CheckBox02_Oceania.isChecked() &&
+                            !quiz00CheckBox03_SouthAsia.isChecked() &&
+                            !quiz00CheckBox04_Australasia.isChecked()) {
+                        displayToast(getString(R.string.choose));
                         return false;
                     }
-                    if (checkBox01_Apac.isChecked() || checkBox02_Oceania.isChecked() ||
-                            checkBox04_Australasia.isChecked()) {
-                        displayFeedback(getString(R.string.answer_correct));
+
+                    if (quiz00CheckBox03_SouthAsia.isChecked()) {
+                        displayToast(getString(R.string.one_answer_incorrect));
+                        return false;
+                    }
+
+                    if (quiz00CheckBox01_Apac.isChecked() || quiz00CheckBox02_Oceania.isChecked() ||
+                            quiz00CheckBox04_Australasia.isChecked()) {
+                        displayToast(getString(R.string.answer_correct));
                         return true;
                     }
                 } else {
-                    Log.e(LOG_TAG, "Quiz Number " + quizNumber + ". Some of the CheckBoxes is null.");
+                    Log.e(LOG_TAG, "Quiz " + quizNumber + ": Some of the CheckBoxes is null.");
                 }
                 break;
 
             case 1:
-                if (radioButton04AustralianFlag != null) {
-                    if (radioButton04AustralianFlag.isChecked()) {
-                        displayFeedback(getString(R.string.answer_correct));
+                if (quiz01RadioButton01NewZealanderFlag != null &&
+                        quiz01RadioButton02FijianFlag != null &&
+                        quiz01RadioButton03TuvaluanFlag != null &&
+                        quiz01RadioButton04AustralianFlag != null) {
+
+                    // If no RadioButton has been checked, display a toast telling the user to choose.
+                    if (!quiz01RadioButton01NewZealanderFlag.isChecked() &&
+                            !quiz01RadioButton02FijianFlag.isChecked() &&
+                            !quiz01RadioButton03TuvaluanFlag.isChecked() &&
+                            !quiz01RadioButton04AustralianFlag.isChecked()) {
+                        displayToast(getString(R.string.choose));
+                        return false;
+                    }
+
+                    if (quiz01RadioButton04AustralianFlag.isChecked()) {
+                        displayToast(getString(R.string.answer_correct));
                         return true;
                     } else {
-                        displayFeedback(getString(R.string.answer_incorrect));
+                        displayToast(getString(R.string.answer_incorrect));
                         return false;
                     }
                 } else {
-                    Log.e(LOG_TAG, "Quiz Number " + quizNumber + ". RadioButton 04 is null.");
+                    Log.e(LOG_TAG, "Quiz " + quizNumber + ": Some of the RadioButtons is null.");
                 }
                 break;
         }
@@ -147,24 +174,28 @@ public class QuizFragment extends Fragment {
         return false;
     }
 
-    private void displayFeedback(String feedback) {
-        Toast.makeText(getContext(), feedback, Toast.LENGTH_SHORT).show();
+    /**
+     * Display a {@link Toast} with the given text.
+     * @param text to display.
+     */
+    private void displayToast(String text) {
+        Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     // The following two binding ensure the two RadioGroups appear as a same RadioGroup.
     @Optional
     @OnClick({R.id.quiz01_radiobutton01_new_zealander_flag, R.id.quiz01_radiobutton02_fijian_flag})
         public void radioGroup02ClearCheck() {
-        if (radioGroup02 != null) {
-            radioGroup02.clearCheck();
+        if (quiz01RadioGroup02 != null) {
+            quiz01RadioGroup02.clearCheck();
         }
     }
 
     @Optional
     @OnClick({R.id.quiz01_radiobutton03_tuvaluan_flag, quiz01_radiobutton04_australian_flag})
     public void radioGroup01CheckCheck() {
-        if (radioGroup01 != null) {
-            radioGroup01.clearCheck();
+        if (quiz01RadioGroup01 != null) {
+            quiz01RadioGroup01.clearCheck();
         }
     }
 

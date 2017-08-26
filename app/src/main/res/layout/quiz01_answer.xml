@@ -13,10 +13,10 @@
 
         <TextView
             style="@style/QuizTextViewStyle"
-            android:text="@string/answer00" />
+            android:text="@string/answer01" />
 
         <Button
-            android:id="@+id/quiz00_button_ok"
+            android:id="@+id/quiz01_button_ok"
             style="@style/ButtonStyle"
             android:layout_height="wrap_content"
             android:layout_gravity="end"

@@ -3,19 +3,23 @@ package com.oz_heng.apps.android.ozquiz;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Optional;
 
 /**
  * DialogFragment to show the correct answer(s).
  */
 public class ViewAnswerDialogFragment extends DialogFragment {
-    int mQuizNumber;
+    final static String LOG_TAG = ViewAnswerDialogFragment.class.getSimpleName();
+
     final static String KEY_QUIZ_NUMBER = "quiz number";
+    int mQuizNumber;
 
     /**
      * Create a new instance of ViewAnswerDialogFragment, providing "quizNumber"
@@ -47,6 +51,14 @@ public class ViewAnswerDialogFragment extends DialogFragment {
             case 0:
                 layoutId = R.layout.quiz00_answer;
                 break;
+
+            case 1:
+                layoutId = R.layout.quiz01_answer;
+                break;
+
+            default:
+                Log.e(LOG_TAG, "onCreateView(): no Layout resource for Quiz " + mQuizNumber);
+                return null;
         }
 
         View view = inflater.inflate(layoutId, container, false);
@@ -55,8 +67,16 @@ public class ViewAnswerDialogFragment extends DialogFragment {
         return view;
     }
 
-    @OnClick(R.id.button_ok)
-    public void ok (View view) {
+    @Optional
+    @OnClick( R.id.quiz00_button_ok )
+    public void ok00 () {
         dismiss();
     }
+
+    @Optional
+    @OnClick( R.id.quiz01_button_ok )
+    public void ok01 () {
+        dismiss();
+    }
+
 }

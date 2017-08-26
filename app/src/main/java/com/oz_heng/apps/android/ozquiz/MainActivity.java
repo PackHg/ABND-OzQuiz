@@ -16,6 +16,10 @@ import butterknife.OnClick;
 // DROPPED: Implement additional "Reset" button?
 // DONE: Implement handling of screen orientation change to landscape.
 // DONE: implement FragmentDialog when "View answer" is clicked.
+// TODO: "Submit": if user hasn't selected anything, toast "Make your choice"
+// TODO: Menu Option item for quiting app
+// TODO: Munu item to reset data
+// TODO: Handle user quitting app
 // TODO: implement "Next" button is clicked.
 
 public class MainActivity extends AppCompatActivity {
@@ -27,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
 
     private int mScore = 0;                 // User score
     private int mCurrentQuizNumber = 0;     // Current quiz number
-    private boolean mIsNewGame = true;      // Is false if user has answered to
-                                            // the first quiz.
+    private boolean mIsNewGame = true;      /* Is false if user has answered to
+                                               the first quiz. */
 
     // Array to record user answer to each quiz.
     static boolean[] mAnswerArray = {false, false};
