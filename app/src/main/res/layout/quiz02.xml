@@ -24,6 +24,7 @@
             style="@style/EditTextStyle"
             android:layout_marginLeft="@dimen/activity_margin_half"
             android:layout_marginStart="@dimen/activity_margin_half"
+            android:inputType="textCapSentences"
             android:hint="@string/enter_here" />
 
     </LinearLayout>
