@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
@@ -19,7 +20,6 @@ import butterknife.Optional;
 import butterknife.Unbinder;
 
 import static com.oz_heng.apps.android.ozquiz.R.id.quiz01_radiobutton04_australian_flag;
-import static com.oz_heng.apps.android.ozquiz.R.layout.quiz01;
 
 /**
  * A fragment to display a layout corresponding to the quiz number.
@@ -45,6 +45,9 @@ public class QuizFragment extends Fragment {
     @Nullable @BindView(R.id.quiz01_radiobutton02_fijian_flag) RadioButton quiz01RadioButton02FijianFlag;
     @Nullable @BindView(R.id.quiz01_radiobutton03_tuvaluan_flag) RadioButton quiz01RadioButton03TuvaluanFlag;
     @Nullable @BindView(R.id.quiz01_radiobutton04_australian_flag) RadioButton quiz01RadioButton04AustralianFlag;
+
+    // Binding Views for Quiz 02
+    @Nullable @BindView(R.id.quiz02_text_answer) EditText quiz02TextAnswer;
 
     private Unbinder mUnbinder;
 
@@ -86,7 +89,12 @@ public class QuizFragment extends Fragment {
                 view = inflater.inflate(R.layout.quiz00, container, false);
                 break;
             case 1:
-                view = inflater.inflate(quiz01, container, false);
+                view = inflater.inflate(R.layout.quiz01, container, false);
+                break;
+            case 2:
+                view = inflater.inflate(R.layout.quiz02, container, false);
+                break;
+
         }
 
         Log.v(LOG_TAG, "onCreateView() - mQuizNumber: " + mQuizNumber);
@@ -133,11 +141,12 @@ public class QuizFragment extends Fragment {
 
                     if (quiz00CheckBox01_Apac.isChecked() || quiz00CheckBox02_Oceania.isChecked() ||
                             quiz00CheckBox04_Australasia.isChecked()) {
-                        displayToast(getString(R.string.answer_correct));
+                        displayToast(getString(R.string.answer_is_correct));
                         return true;
                     }
                 } else {
                     Log.e(LOG_TAG, "Quiz " + quizNumber + ": Some of the CheckBoxes is null.");
+                    return false;
                 }
                 break;
 
@@ -157,16 +166,39 @@ public class QuizFragment extends Fragment {
                     }
 
                     if (quiz01RadioButton04AustralianFlag.isChecked()) {
-                        displayToast(getString(R.string.answer_correct));
+                        displayToast(getString(R.string.answer_is_correct));
                         return true;
                     } else {
-                        displayToast(getString(R.string.answer_incorrect));
+                        displayToast(getString(R.string.answer_is_incorrect));
                         return false;
                     }
                 } else {
                     Log.e(LOG_TAG, "Quiz " + quizNumber + ": Some of the RadioButtons is null.");
+                    return false;
                 }
-                break;
+
+            case 2:
+                String text;
+                if (quiz02TextAnswer != null) {
+                    text = quiz02TextAnswer.getText().toString();
+
+                    if (text.isEmpty()) {
+                        displayToast(getString(R.string.enter_answer));
+                        return false;
+                    }
+
+                    if (text.toLowerCase().equals(getString(R.string.quiz02_right_answer).toLowerCase())) {
+                        displayToast(getString(R.string.answer_is_correct));
+                        return true;
+                    } else {
+                        displayToast(getString(R.string.answer_is_incorrect));
+                        return false;
+                    }
+
+                } else {
+                    Log.e(LOG_TAG, "Quiz " + quizNumber + ": EditText is null.");
+                    return false;
+                }
         }
 
         Log.v(LOG_TAG, "checkAnswers() - mQuizNumber: " + mQuizNumber);

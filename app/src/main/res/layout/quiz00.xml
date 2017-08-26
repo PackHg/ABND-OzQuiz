@@ -7,26 +7,26 @@
 
     <TextView
         style="@style/QuizTextViewStyle"
-        android:text="@string/question01" />
+        android:text="@string/quiz00" />
 
     <CheckBox
         android:id="@+id/quiz00_checkbox_apac"
         style="@style/QuizCheckBoxStyle"
-        android:text="@string/question01_answer01" />
+        android:text="@string/quiz00_option01" />
 
     <CheckBox
         android:id="@+id/quiz00_checkbox_oceania"
         style="@style/QuizCheckBoxStyle"
-        android:text="@string/question01_answer02" />
+        android:text="@string/quiz00_option02" />
 
     <CheckBox
         android:id="@+id/quiz00_checkbox_south_asia"
         style="@style/QuizCheckBoxStyle"
-        android:text="@string/question01_answer03" />
+        android:text="@string/quiz00_option03" />
 
     <CheckBox
         android:id="@+id/quiz00_checkbox_australasia"
         style="@style/QuizCheckBoxStyle"
-        android:text="@string/question01_answer04" />
+        android:text="@string/quiz00_option04" />
 
 </LinearLayout>

@@ -8,20 +8,29 @@
     <string name="ok">OK</string>
 
     <string name="choose">Make your choice</string>
-    <string name="answer_correct">Your answer is correct</string>
-    <string name="answer_incorrect">Your answer is incorrect</string>
+    <string name="answer_is_correct">Your answer is correct</string>
+    <string name="answer_is_incorrect">Your answer is incorrect</string>
     <string name="one_answer_incorrect">One answer is incorrect</string>
+    <string name="your_answer">Your answer:</string>
+    <string name="enter_here">Enter here</string>
+    <string name="enter_answer">Enter your answer</string>
 
     <!-- Quiz 00 -->
-    <string name="question01">In which of the following regions is Australia in?</string>
-    <string name="question01_answer01">1. Asia-Pacific</string>
-    <string name="question01_answer02">2. Oceania</string>
-    <string name="question01_answer03">3. South Asia</string>
-    <string name="question01_answer04">4. Australasia</string>
-    <string name="answer00">"Australia is in Asia-Pacific, Oceania and Australasia."\n\n"Answer 1, 2 or 4 is correct."</string>
+    <string name="quiz00">In which of the following regions is Australia in?</string>
+    <string name="quiz00_option01">1. Asia-Pacific</string>
+    <string name="quiz00_option02">2. Oceania</string>
+    <string name="quiz00_option03">3. South Asia</string>
+    <string name="quiz00_option04">4. Australasia</string>
+    <string name="quiz00_view_answer">"Australia is in Asia-Pacific, Oceania and Australasia."\n\n"Answer 1, 2 or 4 is correct."</string>
 
     <!-- Quiz 01-->
-    <string name="question02">Which flag is Australian?</string>
-    <string name="answer01">"The 4th flag is Australian."\n\n"The 1st, 2nd and 3rd flags are New Zelander, Fijian and Tuvaluan."</string>
+    <string name="quiz01">Which flag is Australian?</string>
+    <string name="quiz01_view_answer01">The 4th flag is Australian.</string>
+    <string name="quiz01_view_answer02">The 1st, 2nd and 3rd flags are New Zelander, Fijian and Tuvaluan.</string>
+
+    <!-- Quiz 02-->
+    <string name="quiz02">What is the capital of Australia?</string>
+    <string name="quiz02_right_answer">Canberra</string>
+    <string name="quiz02_view_answer">Canberra is the capital of Australia.</string>
 
 </resources>

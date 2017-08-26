@@ -8,7 +8,7 @@
 
     <TextView
         style="@style/QuizTextViewStyle"
-        android:text="@string/question02" />
+        android:text="@string/quiz01" />
 
     <RadioGroup
         android:id="@+id/quiz01_radiogroup01"

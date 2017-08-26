@@ -13,7 +13,7 @@
 
         <TextView
             style="@style/QuizTextViewStyle"
-            android:text="@string/answer00" />
+            android:text="@string/quiz00_view_answer" />
 
         <Button
             android:id="@+id/quiz00_button_ok"

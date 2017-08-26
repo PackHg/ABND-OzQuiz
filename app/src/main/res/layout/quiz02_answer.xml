@@ -13,20 +13,10 @@
 
         <TextView
             style="@style/QuizTextViewStyle"
-            android:text="@string/quiz01_view_answer01" />
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:src="@drawable/ic_australian_flag"/>
-
-        <TextView
-            style="@style/QuizTextViewStyle"
-            android:text="@string/quiz01_view_answer02" />
+            android:text="@string/quiz02_view_answer" />
 
         <Button
-            android:id="@+id/quiz01_button_ok"
+            android:id="@+id/quiz02_button_ok"
             style="@style/ButtonStyle"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
