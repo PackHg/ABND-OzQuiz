@@ -119,7 +119,9 @@ public class QuizFragment extends Fragment {
         super.onDestroyView();
 
         //  Set the binded views to null.
-        mUnbinder.unbind();
+        if (mUnbinder != null) {
+            mUnbinder.unbind();
+        }
     }
 
     public boolean checkAnswers(int quizNumber) {

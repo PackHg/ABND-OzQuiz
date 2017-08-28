@@ -1,11 +1,15 @@
 package com.oz_heng.apps.android.ozquiz;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -30,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Tag for identifying the current fragment
     final static String TAG_FRAGMENT = "com.oz_heng.apps.android.ozquiz.quizFragment";
-    final static String TAG_DIALOG_FRAGMENT= "com.oz_heng.apps.android.ozquiz.viewAnswerDialogFragment";
+    final static String TAG_DIALOG_FRAGMENT = "com.oz_heng.apps.android.ozquiz.viewAnswerDialogFragment";
 
     private int mScore = 0;                 // User score
     private int mCurrentQuizNumber = 0;     // Current quiz number
@@ -47,9 +51,54 @@ public class MainActivity extends AppCompatActivity {
     final static String KEY_IS_NEW_GAME = "Is new game";
     final static String[] KEY_ANWSER_ARRAY = {"quiz00", "quiz01", "quiz02", "quiz03"};
 
-    @BindView(R.id.score) TextView mScoreTextView;
+    @BindView(R.id.score)
+    TextView mScoreTextView;
 
-    QuizFragment mQuizFragment;
+    // Curretn QuizFrament
+    private QuizFragment mQuizFragment;
+
+
+    /**
+     * Create a click listner to handle the user confirming they want to exit in a confirmation
+     * dialog.
+     */
+    private DialogInterface.OnClickListener exitButtonClickListener =
+            new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    mIsNewGame = true;  // Next time will be a new game.
+                    finish();           // Close the activity.
+                };
+            };
+
+
+    /**
+     * Create a click listner to handle the user confirming they want to stay in a
+     * confirmation dialog.
+     */
+    private DialogInterface.OnClickListener dismissButtonClickListener =
+            new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    if (dialogInterface != null) {
+                        dialogInterface.dismiss();
+                    }
+                };
+            };
+
+    /**
+     * Create a click listner to handle the user confirming they want to start
+     * over again in a confirmation dialog.
+     */
+    private DialogInterface.OnClickListener startAgainButtonClickListener =
+            new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    mIsNewGame = true;
+                    resetUserData();
+                    createNewQuizFragment(0);
+                }
+            };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,14 +117,10 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        // If it's a new game, reset the data.
+        // If it's a new game, reset the user data.
         if (mIsNewGame) {
-            mCurrentQuizNumber = 0;
-            mScore = 0;
-            for (int i = 0; i < KEY_ANWSER_ARRAY.length; i++) {
-                mAnswerArray[i] = false;
-            }
-        }
+            resetUserData();
+         }
 
         displayScore(mScore);
 
@@ -94,6 +139,28 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_option_exit:
+                showConfirmationDialog(
+                        getString(R.string.confirm_exit),
+                        getString(R.string.exit),
+                        exitButtonClickListener,
+                        getString(R.string.stay),
+                        dismissButtonClickListener);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
     protected void onStop() {
         super.onStop();
         // Save current quiz mumber and score with SharedPreferences.
@@ -109,6 +176,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Reset the user data.
+     */
+    private void resetUserData() {
+        mCurrentQuizNumber = 0;
+        mScore = 0;
+        for (int i = 0; i < KEY_ANWSER_ARRAY.length; i++) {
+            mAnswerArray[i] = false;
+        }
+    }
+
+    /**
      * Display user score.
      * @param score score to display.
      */
@@ -117,7 +195,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.button_submit_answer)
-    public void check() {
+    void check() {
         if (mQuizFragment != null) {
             Log.v(LOG_TAG, "check() - mQuizFragment is not null.");
             if (mQuizFragment.checkAnswers(mCurrentQuizNumber)) {
@@ -137,7 +215,7 @@ public class MainActivity extends AppCompatActivity {
      * Display the answer with a DialogFragment when the "View answer" button is clicked.
      */
     @OnClick(R.id.button_view_answer)
-    public void viewAnswer() {
+    void viewAnswer() {
         ViewAnswerDialogFragment df = ViewAnswerDialogFragment.newInstance(mCurrentQuizNumber);
         df.show(getSupportFragmentManager(), TAG_DIALOG_FRAGMENT + mCurrentQuizNumber);
     }
@@ -146,37 +224,82 @@ public class MainActivity extends AppCompatActivity {
      * Move to the next quiz when the "Next" button is clicked.
      */
     @OnClick(R.id.button_next_quiz)
-    public void nextQuiz() {
+    void nextQuiz() {
         mCurrentQuizNumber ++;
-        // TODO: handle when user clicks "Next" after asnwering last quiz.
+
+        // From the last quiz, ask the user if they want to exit or start over again.
         if (mCurrentQuizNumber >= mAnswerArray.length) {
-            mCurrentQuizNumber = 0;
+            showConfirmationDialog(
+                    getString(R.string.confirm_exit_or_start_again),
+                    getString(R.string.exit),
+                    exitButtonClickListener,
+                    getString(R.string.start_again),
+                    startAgainButtonClickListener);
         }
 
-        // Create a new QuizFragment with the next quiz number as an argument.
-        QuizFragment newFragment = QuizFragment.newInstance(mCurrentQuizNumber);
+        // Create a new QuizFragment with the new quiz number as an argument.
+        createNewQuizFragment(mCurrentQuizNumber);
+    }
+
+    /**
+     * Create a new {@link QuizFragment} with the quizNumber as an argument.
+     * Whatever in the fragment container view with this fragment.
+     *
+     * @param quizNumber the quiz number for the new fragment.
+     */
+    private void createNewQuizFragment(int quizNumber) {
+        QuizFragment newFragment = QuizFragment.newInstance(quizNumber);
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
 
         // Replace whatever is in the fragment container view with this fragment, and add
-        // the transaction to the back stack so the user can navigate back.
+        // the transaction to the back stack.
         transaction.replace(R.id.fragment_container, newFragment,
-                TAG_FRAGMENT + mCurrentQuizNumber);
+                TAG_FRAGMENT + quizNumber);
 
         // Commit the transaction.
         transaction.commit();
 
         mQuizFragment = newFragment;
+        displayScore(mScore);
+
+        // Hide potential soft keyboard which otherwise could be still displayed in the next quiz.
         hideSoftKeyboard();
+    }
+
+    /**
+     * Show a confirmation dialog.
+     *
+     * @param message message to display in the dalog.
+     * @param positiveButtonText text to display in positive button.
+     * @param positiveButtonClickListner is the click listner for what to do when the user clicks
+     *                                   on the positive button.
+     * @param negativeButtonText text to dispaly in the negative button.
+     * @param negativeButtonClickListner is the click listnesr for what to do when the user clicks
+     *                                   on the negative button.
+     *
+     */
+    private void showConfirmationDialog(
+            String message,
+            String positiveButtonText,
+            DialogInterface.OnClickListener positiveButtonClickListner,
+            String negativeButtonText,
+            DialogInterface.OnClickListener negativeButtonClickListner) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(message);
+        builder.setPositiveButton(positiveButtonText, positiveButtonClickListner);
+        builder.setNegativeButton(negativeButtonText, negativeButtonClickListner);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 
     /**
      * Hide the Android soft keyboard.
      *
-     * The Android soft keyboard can be still displayed when moving from a quiz
+     * The Android soft keyboard could potentially be still displayed when moving from a quiz
      * having an {@link android.widget.EditText} to the next quiz.
      * This method hides the soft keyboard.
      */
-    void hideSoftKeyboard() {
+    private void hideSoftKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
