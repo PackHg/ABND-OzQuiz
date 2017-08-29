@@ -1,0 +1,57 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_quiz01"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context=".QuizFragment">
+
+    <TextView
+        style="@style/QuizTextViewStyle"
+        android:text="@string/quiz04" />
+
+    <RadioGroup
+        android:id="@+id/quiz04_radiogroup01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/quiz04_radiobutton01i"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            style="@style/QuizRadioButtonStyle"
+            android:text="@string/quiz04_option01i" />
+
+        <RadioButton
+            android:id="@+id/quiz04_radiobutton02c"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            style="@style/QuizRadioButtonStyle"
+            android:text="@string/quiz04_option02c" />
+
+    </RadioGroup>
+
+    <RadioGroup
+        android:id="@+id/quiz04_radiogroup02"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/quiz04_radiobutton03i"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            style="@style/QuizRadioButtonStyle"
+            android:text="@string/quiz04_option03i" />
+
+        <RadioButton
+            android:id="@+id/quiz04_radiobutton04i"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            style="@style/QuizRadioButtonStyle"
+            android:text="@string/quiz04_option04i" />
+
+    </RadioGroup>
+
+</LinearLayout>

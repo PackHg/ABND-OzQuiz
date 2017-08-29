@@ -42,14 +42,14 @@ public class MainActivity extends AppCompatActivity {
                                                the first quiz. */
 
     // Array to record user answer to each quiz.
-    static boolean[] mAnswerArray = {false, false, false, false};
+    static boolean[] mAnswerArray = {false, false, false, false, false};
 
     // Tag used to save user data with SharedPreferences.
     final static String USER_DATA = "com.oz_heng.apps.android.ozquiz.userData";
     final static String KEY_SCORE = "score";
     final static String KEY_QUIZ_NUMBER = "quiz number";
     final static String KEY_IS_NEW_GAME = "Is new game";
-    final static String[] KEY_ANWSER_ARRAY = {"quiz00", "quiz01", "quiz02", "quiz03"};
+    final static String[] KEY_ANWSER_ARRAY = {"quiz00", "quiz01", "quiz02", "quiz03", "quiz04"};
 
     @BindView(R.id.score)
     TextView mScoreTextView;
@@ -181,7 +181,7 @@ public class MainActivity extends AppCompatActivity {
     private void resetUserData() {
         mCurrentQuizNumber = 0;
         mScore = 0;
-        for (int i = 0; i < KEY_ANWSER_ARRAY.length; i++) {
+        for (int i = 0; i < mAnswerArray.length; i++) {
             mAnswerArray[i] = false;
         }
     }

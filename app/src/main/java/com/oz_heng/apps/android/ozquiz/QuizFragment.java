@@ -20,6 +20,7 @@ import butterknife.Optional;
 import butterknife.Unbinder;
 
 import static com.oz_heng.apps.android.ozquiz.R.id.quiz01_radiobutton04_australian_flag;
+import static com.oz_heng.apps.android.ozquiz.R.id.quiz04_radiobutton04i;
 
 /**
  * A fragment to display a layout corresponding to the quiz number.
@@ -54,6 +55,14 @@ public class QuizFragment extends Fragment {
     @Nullable @BindView(R.id.quiz03_checkbox02) CheckBox quiz03CheckBox02c;
     @Nullable @BindView(R.id.quiz03_checkbox03) CheckBox quiz03CheckBox03c;
     @Nullable @BindView(R.id.quiz03_checkbox04) CheckBox quiz03CheckBox04i;
+
+    // Binding Views for Quiz 04
+    @Nullable @BindView(R.id.quiz04_radiogroup01) RadioGroup quiz04RadioGroup01;
+    @Nullable @BindView(R.id.quiz04_radiogroup02) RadioGroup quiz04RadioGroup02;
+    @Nullable @BindView(R.id.quiz04_radiobutton01i) RadioButton quiz04RadioButton01i;
+    @Nullable @BindView(R.id.quiz04_radiobutton02c) RadioButton quiz04RadioButton02c;
+    @Nullable @BindView(R.id.quiz04_radiobutton03i) RadioButton quiz04RadioButton03i;
+    @Nullable @BindView(R.id.quiz04_radiobutton04i) RadioButton quiz04RadioButton04i;
 
     private Unbinder mUnbinder;
 
@@ -102,6 +111,9 @@ public class QuizFragment extends Fragment {
                 break;
             case 3:
                 view = inflater.inflate(R.layout.quiz03, container, false);
+                break;
+            case 4:
+                view = inflater.inflate(R.layout.quiz04, container, false);
                 break;
         }
 
@@ -239,6 +251,33 @@ public class QuizFragment extends Fragment {
                     return false;
                 }
                 break;
+
+            case 4:
+                if (quiz04RadioButton01i != null &&
+                        quiz04RadioButton02c != null &&
+                        quiz04RadioButton03i != null &&
+                        quiz04RadioButton04i != null) {
+
+                    // If no RadioButton has been checked, display a toast telling the user to choose.
+                    if (!quiz04RadioButton01i.isChecked() &&
+                            !quiz04RadioButton02c.isChecked() &&
+                            !quiz04RadioButton03i.isChecked() &&
+                            !quiz04RadioButton04i.isChecked()) {
+                        displayToast(getString(R.string.choose));
+                        return false;
+                    }
+
+                    if (quiz04RadioButton02c.isChecked()) {
+                        displayToast(getString(R.string.answer_is_correct));
+                        return true;
+                    } else {
+                        displayToast(getString(R.string.answer_is_incorrect));
+                        return false;
+                    }
+                } else {
+                    Log.e(LOG_TAG, "Quiz " + quizNumber + ": Some of the RadioButtons is null.");
+                    return false;
+                }
         }
 
         Log.v(LOG_TAG, "checkAnswers() - mQuizNumber: " + mQuizNumber);
@@ -254,10 +293,10 @@ public class QuizFragment extends Fragment {
         Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
-    // The following two binding ensure the two RadioGroups appear as a same RadioGroup.
+    // The following two binding ensure the two RadioGroups appear as a same RadioGroup in Quiz01
     @Optional
     @OnClick({R.id.quiz01_radiobutton01_new_zealander_flag, R.id.quiz01_radiobutton02_fijian_flag})
-        public void radioGroup02ClearCheck() {
+        public void quiz01RadioGroup02ClearCheck() {
         if (quiz01RadioGroup02 != null) {
             quiz01RadioGroup02.clearCheck();
         }
@@ -265,9 +304,26 @@ public class QuizFragment extends Fragment {
 
     @Optional
     @OnClick({R.id.quiz01_radiobutton03_tuvaluan_flag, quiz01_radiobutton04_australian_flag})
-    public void radioGroup01CheckCheck() {
+    public void quiz01RadioGroup01CheckCheck() {
         if (quiz01RadioGroup01 != null) {
             quiz01RadioGroup01.clearCheck();
+        }
+    }
+
+    // The following two binding ensure the two RadioGroups appear as a same RadioGroup in Quiz04
+    @Optional
+    @OnClick({R.id.quiz04_radiobutton01i, R.id.quiz04_radiobutton02c})
+    public void quiz04RadioGroup02ClearCheck() {
+        if (quiz04RadioGroup02 != null) {
+            quiz04RadioGroup02.clearCheck();
+        }
+    }
+
+    @Optional
+    @OnClick({R.id.quiz04_radiobutton03i, quiz04_radiobutton04i})
+    public void quiz04RadioGroup01CheckCheck() {
+        if (quiz04RadioGroup01 != null) {
+            quiz04RadioGroup01.clearCheck();
         }
     }
 }
