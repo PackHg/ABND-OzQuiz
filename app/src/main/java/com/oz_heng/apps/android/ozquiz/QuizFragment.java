@@ -78,7 +78,7 @@ public class QuizFragment extends Fragment {
      * this fragment using the provided parameters.
      *
      * @param quizNumber Parameter 1.
-     * @return A new instance of fragment QuizFragment.
+     * @return A new instance of QuizFragment.
      */
     public static QuizFragment newInstance(int quizNumber) {
         QuizFragment fragment = new QuizFragment();
@@ -94,7 +94,6 @@ public class QuizFragment extends Fragment {
         if (getArguments() != null) {
             mQuizNumber = getArguments().getInt(ARG_PARAM1);
         }
-        Log.v(LOG_TAG, "HERE: OnCreate() - from getArguments(): mQuizNumber: " + mQuizNumber);
     }
 
     @Override
@@ -123,8 +122,6 @@ public class QuizFragment extends Fragment {
                 break;
         }
 
-        Log.v(LOG_TAG, "HERE: onCreateView() - mQuizNumber: " + mQuizNumber);
-
         if (view != null) {
             mUnbinder = ButterKnife.bind(this, view);
         }
@@ -142,9 +139,14 @@ public class QuizFragment extends Fragment {
         }
     }
 
+    /**
+     * Check the user answer(s).
+     * @param quizNumber quiz number
+     * @return true if user answer is correct
+     *         false if user answer is incorrect
+     */
     public boolean checkAnswers(int quizNumber) {
         String text;
-        Log.v(LOG_TAG, "HERE: checkAnswers() - mQuizNumber: " + mQuizNumber);
 
         switch (quizNumber) {
             case 0:
@@ -306,8 +308,6 @@ public class QuizFragment extends Fragment {
                     return false;
                 }
         }
-
-        Log.v(LOG_TAG, "HERE: checkAnswers() - mQuizNumber: " + mQuizNumber);
 
         return false;
     }

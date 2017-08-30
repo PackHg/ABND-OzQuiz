@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,28 +17,17 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-// DONE: list possible answers as 1, 2, 3 ...
-// DONE: Once user's answer is correct, don't increase score if they submit again on the same quiz.
-// DROPPED: Implement additional "Reset" button?
-// DONE: Implement handling of screen orientation change to landscape.
-// DONE: implement FragmentDialog when "View answer" is clicked.
-// Done: "Submit": if user hasn't selected anything, toast "Make your choice"
-// DONE: Menu Option item for exiting app
-// Dropped: Munu item to reset data
-// DONE: Handle user quitting app
-// DONE: implement "Next" button is clicked.
 
 public class MainActivity extends AppCompatActivity {
     final static String LOG_TAG = MainActivity.class.getSimpleName();
 
-    // Tag for identifying the current fragment
+    // Tag for identifying a QuizFragment and a DialogFragment
     final static String TAG_FRAGMENT = "com.oz_heng.apps.android.ozquiz.quizFragment";
     final static String TAG_DIALOG_FRAGMENT = "com.oz_heng.apps.android.ozquiz.viewAnswerDialogFragment";
 
     private int mScore = 0;                 // User score
     private int mCurrentQuizNumber = 0;     // Current quiz number
-    private boolean mIsNewGame = true;      /* Is false if user has answered to
-                                               the first quiz. */
+    private boolean mIsNewGame = true;      // Is false once the user starts the app
 
     // Array to record user answer to each quiz.
     static boolean[] mAnswerArray = {false, false, false, false, false, false};
@@ -57,9 +45,8 @@ public class MainActivity extends AppCompatActivity {
     // Curretn QuizFrament
     private QuizFragment mQuizFragment;
 
-
     /**
-     * Create a click listner to handle the user confirming they want to exit in a confirmation
+     * Create a click listener to handle the user confirming they want to exit in a confirmation
      * dialog.
      */
     private DialogInterface.OnClickListener exitButtonClickListener =
@@ -72,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
             };
 
     /**
-     * Create a click listner to handle the user confirming they want to stay in a
+     * Create a click listener to handle the user confirming they want to stay in a
      * confirmation dialog.
      */
     private DialogInterface.OnClickListener dismissButtonClickListener =
@@ -116,9 +103,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // If it's a new game, reset the user data.
-        Log.v(LOG_TAG, "HERE: OnCreate() - mIsNewGame = " + mIsNewGame);
         if (mIsNewGame) {
-            Log.v(LOG_TAG, "HERE: OnCreate() - called resetUserData");
             resetUserData();
             mIsNewGame = false;
          }
@@ -131,12 +116,9 @@ public class MainActivity extends AppCompatActivity {
         if (mQuizFragment == null) {
             mQuizFragment = QuizFragment.newInstance(mCurrentQuizNumber);
 
-            // Add the fragment to the 'activity_container' layout
+            // Add the fragment to the 'fragment_container' in the layout.
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
                     mQuizFragment, TAG_FRAGMENT + mCurrentQuizNumber).commit();
-
-            Log.v(LOG_TAG, "HERE: OnCreate() - Created a new QuizFragment with mCurrentQuizNumber "
-                    + mCurrentQuizNumber);
         }
     }
 
@@ -165,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        // Save current quiz mumber and score with SharedPreferences.
+        // Save quiz data with SharedPreferences.
         SharedPreferences sharedPreferences = getSharedPreferences(USER_DATA, 0);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putInt(KEY_QUIZ_NUMBER, mCurrentQuizNumber);
@@ -178,10 +160,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Reset the user data.
+     * Reset the quiz data.
      */
     private void resetUserData() {
-        Log.v(LOG_TAG, "HERE: resetUserData()");
         mCurrentQuizNumber = 0;
         mScore = 0;
         for (int i = 0; i < mAnswerArray.length; i++) {
@@ -200,7 +181,6 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.button_submit_answer)
     void check() {
         if (mQuizFragment != null) {
-            Log.v(LOG_TAG, "HERE: check() - mQuizFragment is not null.");
             if (mQuizFragment.checkAnswers(mCurrentQuizNumber)) {
                 if (!mAnswerArray[mCurrentQuizNumber]) {
                     mScore++;
@@ -208,8 +188,6 @@ public class MainActivity extends AppCompatActivity {
                     mAnswerArray[mCurrentQuizNumber] = true;
                 }
             }
-        } else {
-            Log.v(LOG_TAG, "HERE: check() - mQuizFragment is null.");
         }
     }
 
@@ -241,13 +219,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Create a new QuizFragment with the new quiz number as an argument.
         createNewQuizFragment(mCurrentQuizNumber);
-        Log.v(LOG_TAG, "HERE: nextQuiz(): a new QuizFragment has been created with mCurrentQuizNumber "
-        + mCurrentQuizNumber);
     }
 
     /**
      * Create a new {@link QuizFragment} with the quizNumber as an argument.
-     * Whatever in the fragment container view with this fragment.
+     * Replace Whatever in the fragment container view with this new fragment.
      *
      * @param quizNumber the quiz number for the new fragment.
      */
@@ -266,7 +242,8 @@ public class MainActivity extends AppCompatActivity {
         mQuizFragment = newFragment;
         displayScore(mScore);
 
-        // Hide potential soft keyboard which otherwise could be still displayed in the next quiz.
+        // Hide the soft keyboard which otherwise can potentially be still displayed in the next
+        // quiz.
         hideSoftKeyboard();
     }
 
