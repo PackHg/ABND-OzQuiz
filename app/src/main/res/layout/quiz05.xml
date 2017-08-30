@@ -1,0 +1,32 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_quiz00"
+    style="@style/QuizCheckBoxStyle"
+    android:orientation="vertical"
+    tools:context=".QuizFragment">
+
+    <TextView
+        style="@style/QuizTextViewStyle"
+        android:text="@string/quiz05" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/activity_margin_half"
+        android:orientation="horizontal">
+
+        <TextView
+            style="@style/QuizTextViewStyle"
+            android:text="@string/your_answer" />
+
+        <EditText
+            android:id="@+id/quiz05_text_answer"
+            style="@style/EditTextStyle"
+            android:layout_marginLeft="@dimen/activity_margin_half"
+            android:layout_marginStart="@dimen/activity_margin_half"
+            android:inputType="textCapSentences"
+            android:hint="@string/enter_here" />
+
+    </LinearLayout>
+
+</LinearLayout>

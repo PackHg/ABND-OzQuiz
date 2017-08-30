@@ -52,7 +52,7 @@
     <string name="quiz04_view_answer02">"God Save the Queen is the British national anthem."\n"Power and the Passion is one of Midnight Oil's most famous songs."\n"Great Southern Land is a single released by the Australian rock band Icehouse in 1982."</string>
 
     <!-- Quiz 05-->
-    <string name="quiz05">"Who's Australia's longest-serving prime minister?"</string>
+    <string name="quiz05">"Who is Australia's longest-serving prime minister?"</string>
     <string name="quiz05_right_answer">Robert Menzies</string>
     <string name="quiz05_view_answer">"Robert Menzies was the Prime Minister of Australia from 1939 to 1941 and again from 1949 to 1966. He is Australia's longest-serving prime minister, serving over 18 years in total."</string>
 

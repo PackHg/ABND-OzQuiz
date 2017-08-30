@@ -23,11 +23,11 @@ import butterknife.OnClick;
 // DROPPED: Implement additional "Reset" button?
 // DONE: Implement handling of screen orientation change to landscape.
 // DONE: implement FragmentDialog when "View answer" is clicked.
-// TODO: "Submit": if user hasn't selected anything, toast "Make your choice"
-// TODO: Menu Option item for quiting app
-// TODO: Munu item to reset data
-// TODO: Handle user quitting app
-// TODO: implement "Next" button is clicked.
+// Done: "Submit": if user hasn't selected anything, toast "Make your choice"
+// DONE: Menu Option item for exiting app
+// Dropped: Munu item to reset data
+// DONE: Handle user quitting app
+// DONE: implement "Next" button is clicked.
 
 public class MainActivity extends AppCompatActivity {
     final static String LOG_TAG = MainActivity.class.getSimpleName();
@@ -42,14 +42,14 @@ public class MainActivity extends AppCompatActivity {
                                                the first quiz. */
 
     // Array to record user answer to each quiz.
-    static boolean[] mAnswerArray = {false, false, false, false, false};
+    static boolean[] mAnswerArray = {false, false, false, false, false, false};
 
     // Tag used to save user data with SharedPreferences.
     final static String USER_DATA = "com.oz_heng.apps.android.ozquiz.userData";
     final static String KEY_SCORE = "score";
     final static String KEY_QUIZ_NUMBER = "quiz number";
     final static String KEY_IS_NEW_GAME = "Is new game";
-    final static String[] KEY_ANWSER_ARRAY = {"quiz00", "quiz01", "quiz02", "quiz03", "quiz04"};
+    final static String[] KEY_ANWSER_ARRAY = {"quiz00", "quiz01", "quiz02", "quiz03", "quiz04", "quiz05"};
 
     @BindView(R.id.score)
     TextView mScoreTextView;
@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                     finish();           // Close the activity.
                 };
             };
-
 
     /**
      * Create a click listner to handle the user confirming they want to stay in a
@@ -94,7 +93,6 @@ public class MainActivity extends AppCompatActivity {
             new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
-                    mIsNewGame = true;
                     resetUserData();
                     createNewQuizFragment(0);
                 }
@@ -118,8 +116,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         // If it's a new game, reset the user data.
+        Log.v(LOG_TAG, "HERE: OnCreate() - mIsNewGame = " + mIsNewGame);
         if (mIsNewGame) {
+            Log.v(LOG_TAG, "HERE: OnCreate() - called resetUserData");
             resetUserData();
+            mIsNewGame = false;
          }
 
         displayScore(mScore);
@@ -134,7 +135,8 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,
                     mQuizFragment, TAG_FRAGMENT + mCurrentQuizNumber).commit();
 
-            Log.v(LOG_TAG, "Created a new instance of QuizFragment.");
+            Log.v(LOG_TAG, "HERE: OnCreate() - Created a new QuizFragment with mCurrentQuizNumber "
+                    + mCurrentQuizNumber);
         }
     }
 
@@ -179,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
      * Reset the user data.
      */
     private void resetUserData() {
+        Log.v(LOG_TAG, "HERE: resetUserData()");
         mCurrentQuizNumber = 0;
         mScore = 0;
         for (int i = 0; i < mAnswerArray.length; i++) {
@@ -197,17 +200,16 @@ public class MainActivity extends AppCompatActivity {
     @OnClick(R.id.button_submit_answer)
     void check() {
         if (mQuizFragment != null) {
-            Log.v(LOG_TAG, "check() - mQuizFragment is not null.");
+            Log.v(LOG_TAG, "HERE: check() - mQuizFragment is not null.");
             if (mQuizFragment.checkAnswers(mCurrentQuizNumber)) {
                 if (!mAnswerArray[mCurrentQuizNumber]) {
                     mScore++;
                     displayScore(mScore);
                     mAnswerArray[mCurrentQuizNumber] = true;
-                    mIsNewGame = false;
                 }
             }
         } else {
-            Log.v(LOG_TAG, "check() - mQuizFragment is null.");
+            Log.v(LOG_TAG, "HERE: check() - mQuizFragment is null.");
         }
     }
 
@@ -239,6 +241,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Create a new QuizFragment with the new quiz number as an argument.
         createNewQuizFragment(mCurrentQuizNumber);
+        Log.v(LOG_TAG, "HERE: nextQuiz(): a new QuizFragment has been created with mCurrentQuizNumber "
+        + mCurrentQuizNumber);
     }
 
     /**

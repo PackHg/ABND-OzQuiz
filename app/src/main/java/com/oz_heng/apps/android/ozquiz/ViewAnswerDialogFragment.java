@@ -63,6 +63,9 @@ public class ViewAnswerDialogFragment extends DialogFragment {
             case 4:
                 layoutId = R.layout.quiz04_answer;
                 break;
+            case 5:
+                layoutId = R.layout.quiz05_answer;
+                break;
             default:
                 Log.e(LOG_TAG, "onCreateView(): no Layout resource for Quiz " + mQuizNumber);
                 return null;
@@ -76,31 +79,37 @@ public class ViewAnswerDialogFragment extends DialogFragment {
 
     @Optional
     @OnClick( R.id.quiz00_button_ok )
-    public void ok00 () {
+    void ok00() {
         dismiss();
     }
 
     @Optional
     @OnClick( R.id.quiz01_button_ok )
-    public void ok01 () {
+    void ok01() {
         dismiss();
     }
 
     @Optional
     @OnClick( R.id.quiz02_button_ok )
-    public void ok02 () {
+    void ok02() {
         dismiss();
     }
 
     @Optional
     @OnClick( R.id.quiz03_button_ok )
-    public void ok03 () {
+    void ok03() {
         dismiss();
     }
 
     @Optional
     @OnClick( R.id.quiz04_button_ok )
-    public void ok04 () {
+    void ok04() {
+        dismiss();
+    }
+
+    @Optional
+    @OnClick( R.id.quiz05_button_ok )
+    void ok05() {
         dismiss();
     }
 }

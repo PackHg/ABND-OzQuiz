@@ -64,6 +64,9 @@ public class QuizFragment extends Fragment {
     @Nullable @BindView(R.id.quiz04_radiobutton03i) RadioButton quiz04RadioButton03i;
     @Nullable @BindView(R.id.quiz04_radiobutton04i) RadioButton quiz04RadioButton04i;
 
+    // Binding Views for Quiz 05
+    @Nullable @BindView(R.id.quiz05_text_answer) EditText quiz05TextAnswer;
+
     private Unbinder mUnbinder;
 
     public QuizFragment() {
@@ -91,7 +94,7 @@ public class QuizFragment extends Fragment {
         if (getArguments() != null) {
             mQuizNumber = getArguments().getInt(ARG_PARAM1);
         }
-        Log.v(LOG_TAG, "OnCreate() - mQuizNumber: " + mQuizNumber);
+        Log.v(LOG_TAG, "HERE: OnCreate() - from getArguments(): mQuizNumber: " + mQuizNumber);
     }
 
     @Override
@@ -115,9 +118,12 @@ public class QuizFragment extends Fragment {
             case 4:
                 view = inflater.inflate(R.layout.quiz04, container, false);
                 break;
+            case 5:
+                view = inflater.inflate(R.layout.quiz05, container, false);
+                break;
         }
 
-        Log.v(LOG_TAG, "onCreateView() - mQuizNumber: " + mQuizNumber);
+        Log.v(LOG_TAG, "HERE: onCreateView() - mQuizNumber: " + mQuizNumber);
 
         if (view != null) {
             mUnbinder = ButterKnife.bind(this, view);
@@ -137,8 +143,8 @@ public class QuizFragment extends Fragment {
     }
 
     public boolean checkAnswers(int quizNumber) {
-
-        Log.v(LOG_TAG, "checkAnswers() - mQuizNumber: " + mQuizNumber);
+        String text;
+        Log.v(LOG_TAG, "HERE: checkAnswers() - mQuizNumber: " + mQuizNumber);
 
         switch (quizNumber) {
             case 0:
@@ -200,7 +206,6 @@ public class QuizFragment extends Fragment {
                 }
 
             case 2:
-                String text;
                 if (quiz02TextAnswer != null) {
                     text = quiz02TextAnswer.getText().toString();
 
@@ -278,9 +283,31 @@ public class QuizFragment extends Fragment {
                     Log.e(LOG_TAG, "Quiz " + quizNumber + ": Some of the RadioButtons is null.");
                     return false;
                 }
+
+            case 5:
+                if (quiz05TextAnswer != null) {
+                    text = quiz05TextAnswer.getText().toString();
+
+                    if (text.isEmpty()) {
+                        displayToast(getString(R.string.enter_answer));
+                        return false;
+                    }
+
+                    if (text.toLowerCase().equals(getString(R.string.quiz05_right_answer).toLowerCase())) {
+                        displayToast(getString(R.string.answer_is_correct));
+                        return true;
+                    } else {
+                        displayToast(getString(R.string.answer_is_incorrect));
+                        return false;
+                    }
+
+                } else {
+                    Log.e(LOG_TAG, "Quiz " + quizNumber + ": EditText is null.");
+                    return false;
+                }
         }
 
-        Log.v(LOG_TAG, "checkAnswers() - mQuizNumber: " + mQuizNumber);
+        Log.v(LOG_TAG, "HERE: checkAnswers() - mQuizNumber: " + mQuizNumber);
 
         return false;
     }
