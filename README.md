@@ -5,7 +5,7 @@ This's my **Quiz App** of [Android Basics Nanodegree](https://www.udacity.com/co
 It's a quiz about Australia. There are 6 questions.
 
 This app uses
-* [Fragment](https://developer.android.com/training/basics/fragments/index.html)
+* [Fragment](https://developer.android.com/training/basics/fragments/index.html) for handling the layout of each question and the user answer.
 * [Butter Knife](http://jakewharton.github.io/butterknife/).
 
 ## IDE
@@ -16,3 +16,7 @@ This app uses
 * Emulator and Virtual device: Nexus SX API 25
 
 ## Screenshots
+<img src="https://raw.githubusercontent.com/PackHg/ABND-OzQuiz/master/screenshots/screen01.png">
+<img src="https://raw.githubusercontent.com/PackHg/ABND-OzQuiz/master/screenshots/screen02.png">
+<img src="https://raw.githubusercontent.com/PackHg/ABND-OzQuiz/master/screenshots/screen03.png">
+<img src="https://raw.githubusercontent.com/PackHg/ABND-OzQuiz/master/screenshots/screen04.png"> 
