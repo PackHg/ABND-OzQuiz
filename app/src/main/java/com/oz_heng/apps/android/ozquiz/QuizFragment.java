@@ -21,6 +21,7 @@ import butterknife.Unbinder;
 
 import static com.oz_heng.apps.android.ozquiz.R.id.quiz01_radiobutton04_australian_flag;
 import static com.oz_heng.apps.android.ozquiz.R.id.quiz04_radiobutton04i;
+import static com.oz_heng.apps.android.ozquiz.R.string.choose;
 
 /**
  * A fragment to display a layout corresponding to the quiz number.
@@ -143,170 +144,177 @@ public class QuizFragment extends Fragment {
      * Check the user answer(s).
      * @param quizNumber quiz number
      * @return true if user answer is correct
-     *         false if user answer is incorrect
+     *         false if user answer is incorrect or incomplete
      */
     public boolean checkAnswers(int quizNumber) {
         String text;
 
         switch (quizNumber) {
+            // Question 00
             case 0:
-                if (quiz00CheckBox01_Apac != null &&
-                        quiz00CheckBox02_Oceania != null &&
-                        quiz00CheckBox03_SouthAsia != null &&
-                        quiz00CheckBox04_Australasia != null) {
-
-                    // If no CheckBox has been checked, display a toast telling the user to choose.
-                    if (!quiz00CheckBox01_Apac.isChecked() &&
-                            !quiz00CheckBox02_Oceania.isChecked() &&
-                            !quiz00CheckBox03_SouthAsia.isChecked() &&
-                            !quiz00CheckBox04_Australasia.isChecked()) {
-                        displayToast(getString(R.string.choose));
-                        return false;
-                    }
-
-                    if (quiz00CheckBox03_SouthAsia.isChecked()) {
-                        displayToast(getString(R.string.some_answer_incorrect));
-                        return false;
-                    }
-
-                    if (quiz00CheckBox01_Apac.isChecked() || quiz00CheckBox02_Oceania.isChecked() ||
-                            quiz00CheckBox04_Australasia.isChecked()) {
-                        displayToast(getString(R.string.answer_is_correct));
-                        return true;
-                    }
-                } else {
+                if (quiz00CheckBox01_Apac == null ||
+                        quiz00CheckBox02_Oceania == null ||
+                        quiz00CheckBox03_SouthAsia == null ||
+                        quiz00CheckBox04_Australasia == null) {
                     Log.e(LOG_TAG, "Quiz " + quizNumber + ": Some of the CheckBoxes is null.");
                     return false;
                 }
-                break;
 
+                /* If no CheckBox has been checked by the user, display a toast telling the user
+                 * to make their choice.
+                 */
+                if (!quiz00CheckBox01_Apac.isChecked() &&
+                        !quiz00CheckBox02_Oceania.isChecked() &&
+                        !quiz00CheckBox03_SouthAsia.isChecked() &&
+                        !quiz00CheckBox04_Australasia.isChecked()) {
+                    displayToast(getString(choose));
+                    return false;
+                }
+
+                if (quiz00CheckBox01_Apac.isChecked() &&
+                        quiz00CheckBox02_Oceania.isChecked() &&
+                        quiz00CheckBox04_Australasia.isChecked() &&
+                        !quiz00CheckBox03_SouthAsia.isChecked()) {
+                    displayToast(getString(R.string.answer_is_correct));
+                    return true;
+                } else {
+                    displayToast(getString(R.string.answer_is_incorrect_or_incomplete));
+                    return false;
+                }
+
+            // Question 01
             case 1:
-                if (quiz01RadioButton01NewZealanderFlag != null &&
-                        quiz01RadioButton02FijianFlag != null &&
-                        quiz01RadioButton03TuvaluanFlag != null &&
-                        quiz01RadioButton04AustralianFlag != null) {
-
-                    // If no RadioButton has been checked, display a toast telling the user to choose.
-                    if (!quiz01RadioButton01NewZealanderFlag.isChecked() &&
-                            !quiz01RadioButton02FijianFlag.isChecked() &&
-                            !quiz01RadioButton03TuvaluanFlag.isChecked() &&
-                            !quiz01RadioButton04AustralianFlag.isChecked()) {
-                        displayToast(getString(R.string.choose));
-                        return false;
-                    }
-
-                    if (quiz01RadioButton04AustralianFlag.isChecked()) {
-                        displayToast(getString(R.string.answer_is_correct));
-                        return true;
-                    } else {
-                        displayToast(getString(R.string.answer_is_incorrect));
-                        return false;
-                    }
-                } else {
+                if (quiz01RadioButton01NewZealanderFlag == null ||
+                        quiz01RadioButton02FijianFlag == null ||
+                        quiz01RadioButton03TuvaluanFlag == null ||
+                        quiz01RadioButton04AustralianFlag == null) {
                     Log.e(LOG_TAG, "Quiz " + quizNumber + ": Some of the RadioButtons is null.");
                     return false;
                 }
 
-            case 2:
-                if (quiz02TextAnswer != null) {
-                    text = quiz02TextAnswer.getText().toString();
+                /* If no RadioButton has been checked by the user, display a toast telling the
+                   user to make their choice.
+                 */
+                if (!quiz01RadioButton01NewZealanderFlag.isChecked() &&
+                        !quiz01RadioButton02FijianFlag.isChecked() &&
+                        !quiz01RadioButton03TuvaluanFlag.isChecked() &&
+                        !quiz01RadioButton04AustralianFlag.isChecked()) {
+                    displayToast(getString(choose));
+                    return false;
+                }
 
-                    if (text.isEmpty()) {
-                        displayToast(getString(R.string.enter_answer));
-                        return false;
-                    }
-
-                    if (text.toLowerCase().equals(getString(R.string.quiz02_right_answer).toLowerCase())) {
-                        displayToast(getString(R.string.answer_is_correct));
-                        return true;
-                    } else {
-                        displayToast(getString(R.string.answer_is_incorrect));
-                        return false;
-                    }
-
+                if (quiz01RadioButton04AustralianFlag.isChecked()) {
+                    displayToast(getString(R.string.answer_is_correct));
+                    return true;
                 } else {
+                    displayToast(getString(R.string.answer_is_incorrect));
+                    return false;
+                }
+
+            // Question 02
+            case 2:
+                if (quiz02TextAnswer == null) {
                     Log.e(LOG_TAG, "Quiz " + quizNumber + ": EditText is null.");
                     return false;
                 }
 
-            case 3:
-                if (quiz03CheckBox01i != null &&
-                        quiz03CheckBox02c != null &&
-                        quiz03CheckBox03c != null &&
-                        quiz03CheckBox04i != null) {
+                text = quiz02TextAnswer.getText().toString().trim();
 
-                    // If no CheckBox has been checked, display a toast telling the user to choose.
-                    if (!quiz03CheckBox01i.isChecked() &&
-                            !quiz03CheckBox02c.isChecked() &&
-                            !quiz03CheckBox03c.isChecked() &&
-                            !quiz03CheckBox04i.isChecked()) {
-                        displayToast(getString(R.string.choose));
-                        return false;
-                    }
+                if (text.isEmpty()) {
+                    displayToast(getString(R.string.enter_answer));
+                    return false;
+                }
 
-                    if (quiz03CheckBox01i.isChecked() || quiz03CheckBox04i.isChecked()) {
-                        displayToast(getString(R.string.some_answer_incorrect));
-                        return false;
-                    }
-
-                    if (quiz03CheckBox02c.isChecked() || quiz03CheckBox03c.isChecked()) {
-                        displayToast(getString(R.string.answer_is_correct));
-                        return true;
-                    }
+                if (text.equalsIgnoreCase(getString(R.string.quiz02_right_answer))) {
+                    displayToast(getString(R.string.answer_is_correct));
+                    return true;
                 } else {
+                    displayToast(getString(R.string.answer_is_incorrect));
+                    return false;
+                }
+
+            // Question 03
+            case 3:
+                if (quiz03CheckBox01i == null ||
+                        quiz03CheckBox02c == null ||
+                        quiz03CheckBox03c == null ||
+                        quiz03CheckBox04i == null) {
                     Log.e(LOG_TAG, "Quiz " + quizNumber + ": Some of the CheckBoxes is null.");
                     return false;
                 }
-                break;
+                /* If no CheckBox has been checked by the user, display a toast telling the user
+                   to make their choice.
+                 */
+                if (!quiz03CheckBox01i.isChecked() &&
+                        !quiz03CheckBox02c.isChecked() &&
+                        !quiz03CheckBox03c.isChecked() &&
+                        !quiz03CheckBox04i.isChecked()) {
+                    displayToast(getString(choose));
+                    return false;
+                }
 
-            case 4:
-                if (quiz04RadioButton01i != null &&
-                        quiz04RadioButton02c != null &&
-                        quiz04RadioButton03i != null &&
-                        quiz04RadioButton04i != null) {
-
-                    // If no RadioButton has been checked, display a toast telling the user to choose.
-                    if (!quiz04RadioButton01i.isChecked() &&
-                            !quiz04RadioButton02c.isChecked() &&
-                            !quiz04RadioButton03i.isChecked() &&
-                            !quiz04RadioButton04i.isChecked()) {
-                        displayToast(getString(R.string.choose));
-                        return false;
-                    }
-
-                    if (quiz04RadioButton02c.isChecked()) {
-                        displayToast(getString(R.string.answer_is_correct));
-                        return true;
-                    } else {
-                        displayToast(getString(R.string.answer_is_incorrect));
-                        return false;
-                    }
+                if ( quiz03CheckBox02c.isChecked() &&
+                        quiz03CheckBox03c.isChecked() &&
+                        !quiz03CheckBox01i.isChecked() &&
+                        !quiz03CheckBox04i.isChecked()) {
+                    displayToast(getString(R.string.answer_is_correct));
+                    return true;
                 } else {
+                    displayToast(getString(R.string.answer_is_incorrect_or_incomplete));
+                    return false;
+                }
+
+            //Question 04
+            case 4:
+                if (quiz04RadioButton01i == null ||
+                        quiz04RadioButton02c == null ||
+                        quiz04RadioButton03i == null ||
+                        quiz04RadioButton04i == null) {
                     Log.e(LOG_TAG, "Quiz " + quizNumber + ": Some of the RadioButtons is null.");
                     return false;
                 }
 
-            case 5:
-                if (quiz05TextAnswer != null) {
-                    text = quiz05TextAnswer.getText().toString();
+                /* If no RadioButton has been checked by thue user, display a toast telling the user
+                   to choose make their choice.
+                 */
+                if (!quiz04RadioButton01i.isChecked() &&
+                        !quiz04RadioButton02c.isChecked() &&
+                        !quiz04RadioButton03i.isChecked() &&
+                        !quiz04RadioButton04i.isChecked()) {
+                    displayToast(getString(choose));
+                    return false;
+                }
 
-                    if (text.isEmpty()) {
-                        displayToast(getString(R.string.enter_answer));
-                        return false;
-                    }
-
-                    if (text.toLowerCase().equals(getString(R.string.quiz05_right_answer).toLowerCase())) {
-                        displayToast(getString(R.string.answer_is_correct));
-                        return true;
-                    } else {
-                        displayToast(getString(R.string.answer_is_incorrect));
-                        return false;
-                    }
-
+                if (quiz04RadioButton02c.isChecked()) {
+                    displayToast(getString(R.string.answer_is_correct));
+                    return true;
                 } else {
+                    displayToast(getString(R.string.answer_is_incorrect));
+                    return false;
+                }
+
+            // Question 05
+            case 5:
+                if (quiz05TextAnswer == null) {
                     Log.e(LOG_TAG, "Quiz " + quizNumber + ": EditText is null.");
                     return false;
                 }
+
+                text = quiz05TextAnswer.getText().toString().trim();
+
+                if (text.isEmpty()) {
+                    displayToast(getString(R.string.enter_answer));
+                    return false;
+                }
+
+                if (text.equalsIgnoreCase(getString(R.string.quiz05_right_answer).toLowerCase())) {
+                    displayToast(getString(R.string.answer_is_correct));
+                    return true;
+                } else {
+                    displayToast(getString(R.string.answer_is_incorrect));
+                    return false;
+                }
+
         }
 
         return false;

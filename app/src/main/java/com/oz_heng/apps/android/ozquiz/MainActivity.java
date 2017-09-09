@@ -210,7 +210,8 @@ public class MainActivity extends AppCompatActivity {
         // From the last quiz, ask the user if they want to exit or start over again.
         if (mCurrentQuizNumber >= mAnswerArray.length) {
             showConfirmationDialog(
-                    getString(R.string.confirm_exit_or_start_again),
+                    getString(R.string.your_score_is) + mScore + ".\n\n" +
+                            getString(R.string.confirm_exit_or_start_again),
                     getString(R.string.exit),
                     exitButtonClickListener,
                     getString(R.string.start_again),
