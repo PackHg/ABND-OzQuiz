@@ -172,16 +172,32 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Display user score.
+     * This method is simply used to display the user score in a TextView.
+     * Refer to the below check() method that includes the display of Toast message.
+     *
      * @param score score to display.
      */
     private void displayScore(int score) {
         mScoreTextView.setText(String.valueOf(score));
     }
 
+    /**
+     * Method check() is called when the user clicks the "Submit answer" button.
+     * A Toast message that displays the result is shown in QuizFragment.checkAnswers()
+     * method.
+     */
     @OnClick(R.id.button_submit_answer)
     void check() {
         if (mQuizFragment != null) {
+            /* QuizFragment.checkAnswers(mCurrentQuizNumber) returns true if the user's
+               answer is correct, else returns false.
+               QuizFragment.checkAnswers(mCurrentQuizNumber) also displays a Toast message telling
+               the user is correct or not.
+             */
             if (mQuizFragment.checkAnswers(mCurrentQuizNumber)) {
+                /* If the user hasn't already provided correct answer to this question, then
+                   increment and display their score.
+                 */
                 if (!mAnswerArray[mCurrentQuizNumber]) {
                     mScore++;
                     displayScore(mScore);
@@ -207,7 +223,9 @@ public class MainActivity extends AppCompatActivity {
     void nextQuiz() {
         mCurrentQuizNumber ++;
 
-        // From the last quiz, ask the user if they want to exit or start over again.
+        /* Following the last quiz, show the score and ask the user if they want to exit or start
+           over again.
+         */
         if (mCurrentQuizNumber >= mAnswerArray.length) {
             showConfirmationDialog(
                     getString(R.string.your_score_is) + mScore + ".\n\n" +
