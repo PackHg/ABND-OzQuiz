@@ -20,7 +20,7 @@ This app uses
 * Emulator and Virtual device: Nexus SX API 25
 
 ## Screenshots
-<img src="https://raw.githubusercontent.com/PackHg/ABND-OzQuiz/master/screenshots/screen01.png">
-<img src="https://raw.githubusercontent.com/PackHg/ABND-OzQuiz/master/screenshots/screen02.png">
-<img src="https://raw.githubusercontent.com/PackHg/ABND-OzQuiz/master/screenshots/screen03.png">
-<img src="https://raw.githubusercontent.com/PackHg/ABND-OzQuiz/master/screenshots/screen04.png">
+<img src="https://raw.githubusercontent.com/PackHg/ABND-OzQuiz/master/screenshots/screen01.png" width="300">
+<img src="https://raw.githubusercontent.com/PackHg/ABND-OzQuiz/master/screenshots/screen02.png" width="300">
+<img src="https://raw.githubusercontent.com/PackHg/ABND-OzQuiz/master/screenshots/screen03.png" width="600">
+<img src="https://raw.githubusercontent.com/PackHg/ABND-OzQuiz/master/screenshots/screen04.png" width="300">
